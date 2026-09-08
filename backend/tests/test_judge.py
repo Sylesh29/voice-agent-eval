@@ -184,15 +184,39 @@ SECRET_SHAPES = [
 ]
 
 
-def _tracked_files() -> list[Path]:
-    out = subprocess.run(["git", "ls-files", "-z"], cwd=REPO,
-                         capture_output=True, text=True, check=True).stdout
-    return [REPO / p for p in out.split("\0") if p]
+SKIP_DIRS = {".git", "node_modules", ".venv", "__pycache__", ".next", ".pytest_cache"}
+
+
+def _scan_files() -> tuple[list[Path], str]:
+    """Files to scan for credentials, and how we found them.
+
+    Inside the repo: git's tracked list — the set that would actually be shared.
+    Outside it (a reviewer who unzipped the submission): everything present, which
+    is exactly the right set there, because the package IS what was shared.
+
+    Written this way after the first submission zip was checked: shelling out to
+    git crashed outside a repo, so a reviewer running pytest on the extracted
+    package saw two errors before reading a line of code.
+    """
+    try:
+        out = subprocess.run(["git", "ls-files", "-z"], cwd=REPO,
+                             capture_output=True, text=True, check=True).stdout
+        return [REPO / p for p in out.split("\0") if p], "git"
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        found = []
+        for path in REPO.rglob("*"):
+            if any(part in SKIP_DIRS for part in path.parts):
+                continue
+            if path.is_file():
+                found.append(path)
+        return found, "walk"
 
 
 def test_no_credentials_in_any_tracked_file():
+    files, mode = _scan_files()
+    assert files, "scan found no files at all"
     offenders = []
-    for path in _tracked_files():
+    for path in files:
         if path.name == "test_judge.py" or not path.is_file():
             continue          # this file necessarily contains the patterns themselves
         try:
@@ -203,13 +227,16 @@ def test_no_credentials_in_any_tracked_file():
             m = re.search(pattern, text)
             if m:
                 offenders.append(f"{path.relative_to(REPO)}: {label} near {m.group(0)[:12]}...")
-    assert not offenders, "credentials found in tracked files:\n" + "\n".join(offenders)
+    assert not offenders, (f"credentials found ({mode} scan):\n" + "\n".join(offenders))
 
 
-def test_dotenv_is_not_tracked():
-    tracked = {p.name for p in _tracked_files()}
-    assert ".env" not in tracked, ".env must never be committed"
-    assert ".env.example" in tracked, "the template SHOULD be committed, with empty values"
+def test_dotenv_never_ships():
+    """In the repo: .env must be untracked. In an extracted package: absent entirely.
+    Both are the same requirement — a credential file must never reach a reviewer."""
+    files, mode = _scan_files()
+    names = {p.name for p in files}
+    assert ".env" not in names, f".env must never ship (found via {mode} scan)"
+    assert ".env.example" in names, "the template SHOULD ship, with empty values"
 
 
 def test_env_example_has_no_filled_values():
