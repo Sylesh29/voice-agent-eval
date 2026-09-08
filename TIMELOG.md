@@ -3,3 +3,9 @@
 | Elapsed | What |
 |---|---|
 | 0:00 | Opened assignment. Read twice. Repo init, README assumptions + scope committed before any feature code. |
+| 0:15 | World + fault-injecting tool layer. Chose `silent_noop` as the central fault because it is invisible to any transcript-based evaluator. |
+| 0:30 | Scenario schema + 17-scenario dataset across 2 workflows, 4 tiers. |
+| 0:45 | Caller sim, three agent configs (a config diff, not a prompt diff), runner, trace capture. |
+| 1:00 | Six state-verified metrics + closure v1. First full run of all three agents. Results were not what I predicted — see Experiment. |
+| 1:15 | Hand-labelled 21 traces from the transcript only, then a second pass with world state revealed. |
+| 1:45 | Closure evaluator v1 -> v2 -> v3, each revision forced by a specific disagreement I investigated. Also revised escalation_precision after it penalised correct behaviour. |

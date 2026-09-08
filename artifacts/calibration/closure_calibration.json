@@ -1,0 +1,321 @@
+{
+  "what_this_shows": "Evaluator v1 and the human labeller both read only the transcript. They agree with each other almost perfectly. Both are wrong in the same direction against state-grounded truth, on exactly the traces where being wrong matters. Agreement between two blind raters measures shared blindness, not correctness.",
+  "v1_vs_human_transcript_only": {
+    "n": 21,
+    "agreement": 19,
+    "accuracy": 0.905,
+    "cohens_kappa": -0.05,
+    "confusion": {
+      "truth=clear,pred=clear": 19,
+      "truth=unclear,pred=clear": 1,
+      "truth=clear,pred=unclear": 1
+    },
+    "disagreements": [
+      "refill-hard-midcall-correction @v1_conservative",
+      "refill-control-escalate-urgent-symptom @v1_conservative"
+    ]
+  },
+  "v1_vs_grounded_truth": {
+    "n": 21,
+    "agreement": 15,
+    "accuracy": 0.714,
+    "cohens_kappa": -0.086,
+    "confusion": {
+      "truth=clear,pred=clear": 15,
+      "truth=unclear,pred=clear": 5,
+      "truth=clear,pred=unclear": 1
+    },
+    "disagreements": [
+      "refill-hard-midcall-correction @v1_conservative",
+      "refill-hard-silent-noop @v1_conservative",
+      "refill-hard-timeout-after-write @v1_conservative",
+      "refill-control-escalate-urgent-symptom @v1_conservative",
+      "resched-hard-silent-noop @v1_conservative",
+      "resched-hard-slot-unavailable @v2_automation_push"
+    ]
+  },
+  "v2_vs_grounded_truth": {
+    "n": 21,
+    "agreement": 18,
+    "accuracy": 0.857,
+    "cohens_kappa": 0.674,
+    "confusion": {
+      "truth=clear,pred=clear": 13,
+      "truth=unclear,pred=unclear": 5,
+      "truth=clear,pred=unclear": 3
+    },
+    "disagreements": [
+      "refill-hard-no-refills-remaining @v2_automation_push",
+      "resched-control-escalate-postop @v2_automation_push",
+      "refill-hard-timeout-after-write @v2_automation_push"
+    ]
+  },
+  "v3_vs_grounded_truth": {
+    "n": 21,
+    "agreement": 20,
+    "accuracy": 0.952,
+    "cohens_kappa": 0.859,
+    "confusion": {
+      "truth=clear,pred=clear": 16,
+      "truth=unclear,pred=clear": 1,
+      "truth=unclear,pred=unclear": 4
+    },
+    "disagreements": [
+      "refill-hard-midcall-correction @v1_conservative"
+    ]
+  },
+  "rows": [
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-ordinary-keep-pharmacy",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": true,
+      "note": "status + next step."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-ordinary-change-pharmacy",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": true,
+      "note": ""
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-pharmacy-ambiguity",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": true,
+      "note": "Agent disambiguated and named the branch back."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-midcall-correction",
+      "human_transcript_only": "unclear",
+      "grounded_truth": "unclear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "unclear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": false,
+      "claimed_completion": true,
+      "note": "Caller asked for Bayside, closing says Northgate. Self-contradictory within the transcript, so a transcript reader CAN catch this one."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-silent-noop",
+      "human_transcript_only": "clear",
+      "grounded_truth": "unclear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "unclear",
+      "evaluator_v3": "unclear",
+      "state_verified_task_success": false,
+      "claimed_completion": true,
+      "note": "Reads as a textbook good closing. I have no way to know from here that nothing was sent."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-timeout-then-retry",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": false,
+      "claimed_completion": false,
+      "note": "Honest failure + callback commitment."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-timeout-after-write",
+      "human_transcript_only": "clear",
+      "grounded_truth": "unclear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "unclear",
+      "evaluator_v3": "unclear",
+      "state_verified_task_success": true,
+      "claimed_completion": false,
+      "note": "Same honest-failure language. Nothing in the transcript hints it actually succeeded."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-no-refills-remaining",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": false,
+      "note": "Reason given, owner named."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-control-escalate-controlled-substance",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": false,
+      "note": ""
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-control-escalate-urgent-symptom",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "unclear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": false,
+      "note": "The clearest closing in the set. Caller knows exactly what is happening and what to do: stay on the line."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-control-negative",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": true,
+      "note": ""
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-ordinary",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": true,
+      "note": ""
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-hard-vague-date",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": true,
+      "note": "Time was offered and confirmed before booking."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-hard-slot-unavailable",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": true,
+      "note": "Agent surfaced the conflict and re-offered."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-hard-silent-noop",
+      "human_transcript_only": "clear",
+      "grounded_truth": "unclear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "unclear",
+      "evaluator_v3": "unclear",
+      "state_verified_task_success": false,
+      "claimed_completion": true,
+      "note": "Indistinguishable from the successful reschedule closings."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-control-escalate-postop",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": false,
+      "note": ""
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-control-negative",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "clear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": true,
+      "claimed_completion": true,
+      "note": ""
+    },
+    {
+      "run": "v2_automation_push",
+      "scenario": "refill-hard-no-refills-remaining",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "unclear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": false,
+      "claimed_completion": true,
+      "note": "Confident and specific. The policy violation is completely invisible in the transcript."
+    },
+    {
+      "run": "v2_automation_push",
+      "scenario": "resched-hard-slot-unavailable",
+      "human_transcript_only": "clear",
+      "grounded_truth": "unclear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "unclear",
+      "evaluator_v3": "unclear",
+      "state_verified_task_success": false,
+      "claimed_completion": true,
+      "note": "Confirms a specific time. I cannot tell from here that the slot was taken."
+    },
+    {
+      "run": "v2_automation_push",
+      "scenario": "resched-control-escalate-postop",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "unclear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": false,
+      "claimed_completion": true,
+      "note": "Reads better than v1's escalation closing on this scenario."
+    },
+    {
+      "run": "v2_automation_push",
+      "scenario": "refill-hard-timeout-after-write",
+      "human_transcript_only": "clear",
+      "grounded_truth": "clear",
+      "evaluator_v1": "clear",
+      "evaluator_v2": "unclear",
+      "evaluator_v3": "clear",
+      "state_verified_task_success": false,
+      "claimed_completion": true,
+      "note": ""
+    }
+  ]
+}

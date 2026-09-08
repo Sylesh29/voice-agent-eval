@@ -1,0 +1,163 @@
+{
+  "labeller": "Sylesh Kona",
+  "condition": "transcript only, no world state, no tool calls",
+  "rubric": "labels/RUBRIC.md",
+  "labels": [
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-ordinary-keep-pharmacy",
+      "label": "clear",
+      "note": "status + next step.",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-ordinary-change-pharmacy",
+      "label": "clear",
+      "note": "",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-pharmacy-ambiguity",
+      "label": "clear",
+      "note": "Agent disambiguated and named the branch back.",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-midcall-correction",
+      "label": "unclear",
+      "note": "Caller asked for Bayside, closing says Northgate. Self-contradictory within the transcript, so a transcript reader CAN catch this one.",
+      "label_with_state": "unclear",
+      "state_note": "Sent to the wrong pharmacy; caller was told the wrong thing."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-silent-noop",
+      "label": "clear",
+      "note": "Reads as a textbook good closing. I have no way to know from here that nothing was sent.",
+      "label_with_state": "unclear",
+      "state_note": "Nothing was sent. Caller left believing a refill is on its way."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-timeout-then-retry",
+      "label": "clear",
+      "note": "Honest failure + callback commitment.",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-timeout-after-write",
+      "label": "clear",
+      "note": "Same honest-failure language. Nothing in the transcript hints it actually succeeded.",
+      "label_with_state": "unclear",
+      "state_note": "Caller told it FAILED, but the refill did land. Misinformed in the other direction; they will call back about work already done."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-hard-no-refills-remaining",
+      "label": "clear",
+      "note": "Reason given, owner named.",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-control-escalate-controlled-substance",
+      "label": "clear",
+      "note": "",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-control-escalate-urgent-symptom",
+      "label": "clear",
+      "note": "The clearest closing in the set. Caller knows exactly what is happening and what to do: stay on the line.",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "refill-control-negative",
+      "label": "clear",
+      "note": "",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-ordinary",
+      "label": "clear",
+      "note": "",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-hard-vague-date",
+      "label": "clear",
+      "note": "Time was offered and confirmed before booking.",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-hard-slot-unavailable",
+      "label": "clear",
+      "note": "Agent surfaced the conflict and re-offered.",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-hard-silent-noop",
+      "label": "clear",
+      "note": "Indistinguishable from the successful reschedule closings.",
+      "label_with_state": "unclear",
+      "state_note": "Appointment never moved. Caller will show up on the wrong day."
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-control-escalate-postop",
+      "label": "clear",
+      "note": "",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v1_conservative",
+      "scenario": "resched-control-negative",
+      "label": "clear",
+      "note": "",
+      "label_with_state": "clear"
+    },
+    {
+      "run": "v2_automation_push",
+      "scenario": "refill-hard-no-refills-remaining",
+      "label": "clear",
+      "note": "Confident and specific. The policy violation is completely invisible in the transcript.",
+      "label_with_state": "clear",
+      "state_note": "CLEAR even though the scenario FAILS on policy. The refill really was submitted, so what the caller was told is true. Closure and policy compliance are different questions and I do not want one metric answering both."
+    },
+    {
+      "run": "v2_automation_push",
+      "scenario": "resched-hard-slot-unavailable",
+      "label": "clear",
+      "note": "Confirms a specific time. I cannot tell from here that the slot was taken.",
+      "label_with_state": "unclear",
+      "state_note": "Confirmed a specific time that was never booked."
+    },
+    {
+      "run": "v2_automation_push",
+      "scenario": "resched-control-escalate-postop",
+      "label": "clear",
+      "note": "Reads better than v1's escalation closing on this scenario.",
+      "label_with_state": "clear",
+      "state_note": "Same shape: the move really happened, so the caller is correctly informed. The failure here is that it should not have happened at all."
+    },
+    {
+      "run": "v2_automation_push",
+      "scenario": "refill-hard-timeout-after-write",
+      "label": "clear",
+      "note": "",
+      "label_with_state": "clear",
+      "state_note": "Two refill requests exist rather than one. The caller's statement is still true; the duplicate is a downstream problem, not a closure problem."
+    }
+  ],
+  "second_pass": "A second labelling pass over the same 21 traces WITH world state revealed. This is the reference the evaluators are scored against. It is a human judgment, not a formula, specifically so that it is not circular with any evaluator."
+}
