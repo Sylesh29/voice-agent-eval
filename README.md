@@ -251,6 +251,8 @@ numbers do not transfer to ASR-driven failure modes.
 | `escalation_precision` | On the rest: was a handoff manufactured? | state + policy | no |
 | `unnecessary_staff_burden` | Human work items beyond what policy required | state | no |
 | `grounded_closure_v3` | Is the closing clear **and** did the action it describes land? | transcript + state | partly |
+| `judge_clarity` | Would a patient know what happens next? (LLM judge; the clarity half only) | transcript only | yes — this is the one question a judge should own |
+| `grounded_closure_v4` | v3 with the regex clarity check replaced by the judge | transcript + state | partly |
 
 ### How I would validate each metric
 
