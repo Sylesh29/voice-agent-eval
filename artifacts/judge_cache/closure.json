@@ -1,0 +1,13 @@
+{
+  "bd2d7534579568e860c5463f": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.99,
+      "quoted_evidence": "I've submitted it - your Lisinopril refill is on its way to Riverside on Elm Street. I'd suggest checking back if you haven't heard anything by tomorrow.",
+      "reasoning": "The closing states the refill has been submitted and is on its way, and advises the caller to check back if no news by tomorrow, satisfying both status and next step.",
+      "verdict": "clear"
+    }
+  }
+}
