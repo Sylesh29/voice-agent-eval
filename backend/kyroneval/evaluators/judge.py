@@ -59,6 +59,11 @@ DEFAULT_MODELS = {
     "openai": "gpt-4o-2024-11-20",
 }
 
+# stdlib urllib sends "Python-urllib/3.x" by default, and Groq's Cloudflare edge
+# rejects that signature outright with HTTP 403 "error code: 1010" -- which reads
+# like an auth failure and is not one. Identify the client properly.
+USER_AGENT = "kyron-eval/0.1 (closure-judge; +https://github.com/sylesh29)"
+
 PROVIDERS = {
     "groq": ("GROQ_API_KEY", "https://api.groq.com/openai/v1"),
     "anthropic": ("ANTHROPIC_API_KEY", "https://api.anthropic.com/v1"),
@@ -124,10 +129,11 @@ def resolve_provider() -> tuple[str, str, str] | None:
 
 
 def _headers(provider: str, key: str) -> dict:
+    base = {"content-type": "application/json", "accept": "application/json",
+            "user-agent": USER_AGENT}
     if provider == "anthropic":
-        return {"content-type": "application/json", "x-api-key": key,
-                "anthropic-version": "2023-06-01"}
-    return {"content-type": "application/json", "authorization": f"Bearer {key}"}
+        return {**base, "x-api-key": key, "anthropic-version": "2023-06-01"}
+    return {**base, "authorization": f"Bearer {key}"}
 
 
 def _request(url: str, headers: dict, payload: dict | None = None) -> dict:
@@ -141,7 +147,16 @@ def _request(url: str, headers: dict, payload: dict | None = None) -> dict:
         # Surface the provider's own message. A bare "HTTP 400" while debugging a
         # model name is the single most annoying error in this whole exercise.
         body = e.read().decode(errors="replace")[:600]
-        raise RuntimeError(f"{e.code} from {url}\n{body}") from None
+        hint = ""
+        if "1010" in body:
+            hint = ("\nCloudflare rejected the client signature (error 1010). This is "
+                    "NOT an auth or model-name problem -- it means the User-Agent was "
+                    "refused. Check that USER_AGENT is being sent.")
+        elif e.code in (401, 403):
+            hint = "\nCheck the API key, and that it belongs to the selected provider."
+        elif e.code == 404:
+            hint = "\nUsually a bad model name -- run `--list-models` and set JUDGE_MODEL."
+        raise RuntimeError(f"{e.code} from {url}\n{body}{hint}") from None
 
 
 def list_models() -> list[str]:

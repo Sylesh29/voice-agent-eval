@@ -242,3 +242,19 @@ def test_dotenv_populates_when_env_is_unset(monkeypatch, tmp_path):
     monkeypatch.delenv("GROQ_API_KEY", raising=False)
     config.load_env(force=True)
     assert os.environ["GROQ_API_KEY"] == "from_file"
+
+
+def test_every_provider_sends_an_explicit_user_agent():
+    """urllib defaults to "Python-urllib/3.x", which Groq's Cloudflare edge refuses
+    with a 403 that looks exactly like an auth failure. Cost an hour once."""
+    for provider in judge.PROVIDERS:
+        h = judge._headers(provider, "k")
+        assert h.get("user-agent") == judge.USER_AGENT
+        assert "urllib" not in h["user-agent"].lower()
+
+
+def test_auth_shape_is_right_per_provider():
+    assert judge._headers("anthropic", "k")["x-api-key"] == "k"
+    assert "authorization" not in judge._headers("anthropic", "k")
+    for p in ("groq", "openai"):
+        assert judge._headers(p, "k")["authorization"] == "Bearer k"

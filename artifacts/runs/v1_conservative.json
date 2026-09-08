@@ -1,7 +1,7 @@
 {
   "run_id": "v1_conservative",
   "agent_id": "v1_conservative",
-  "created_at": "2026-09-08T16:27:01+00:00",
+  "created_at": "2026-09-08T16:42:19+00:00",
   "dataset_version": "1.0",
   "config_fingerprint": "2d12a19f552d",
   "traces": [
@@ -10228,7 +10228,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10236,7 +10236,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted refill RX-1->PH-1 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -10342,7 +10342,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10350,7 +10350,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted refill RX-4->PH-3 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -10456,7 +10456,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10464,7 +10464,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted refill RX-1->PH-2 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -10570,7 +10570,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10578,7 +10578,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted refill RX-4->PH-4 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -10675,7 +10675,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10683,7 +10683,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted refill RX-1->PH-1 present in world: False"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=False)."
@@ -10784,7 +10784,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10792,7 +10792,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted refill RX-4->PH-4 present in world: False",
           "agent claimed failure; grounded against the action NOT landing"
         ],
@@ -10893,7 +10893,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10901,7 +10901,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted refill RX-1->PH-1 present in world: True",
           "agent claimed failure; grounded against the action NOT landing"
         ],
@@ -11000,7 +11000,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11008,7 +11008,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
@@ -11107,7 +11107,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11115,7 +11115,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
@@ -11213,7 +11213,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11221,7 +11221,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
@@ -11328,7 +11328,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11336,7 +11336,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted refill RX-5->PH-1 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -11439,7 +11439,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11447,7 +11447,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted move of AP-1 to 2026-09-24T10:00; world says 2026-09-24T10:00"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -11550,7 +11550,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11558,7 +11558,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted move of AP-3 to 2026-10-02T09:00; world says 2026-10-02T09:00"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -11658,7 +11658,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11666,7 +11666,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted move of AP-3 to 2026-09-25T15:00; world says 2026-09-25T15:00"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -11763,7 +11763,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11771,7 +11771,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted move of AP-3 to 2026-10-02T09:00; world says 2026-10-01T11:00"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=False)."
@@ -11869,7 +11869,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11877,7 +11877,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
@@ -11981,7 +11981,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed."
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11989,7 +11989,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "No cassette entry and no API key set. Reported as UNAVAILABLE rather than guessed.",
+          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
           "asserted move of AP-4 to 2026-09-23T14:00; world says 2026-09-23T14:00"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
