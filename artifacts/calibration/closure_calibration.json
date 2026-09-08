@@ -64,6 +64,31 @@
       "refill-hard-midcall-correction @v1_conservative"
     ]
   },
+  "regex_clarity_vs_human_transcript_only": {
+    "n": 21,
+    "agreement": 19,
+    "accuracy": 0.905,
+    "cohens_kappa": -0.05,
+    "confusion": {
+      "truth=clear,pred=clear": 19,
+      "truth=unclear,pred=clear": 1,
+      "truth=clear,pred=unclear": 1
+    },
+    "disagreements": [
+      "refill-hard-midcall-correction @v1_conservative",
+      "refill-control-escalate-urgent-symptom @v1_conservative"
+    ]
+  },
+  "judge_clarity_vs_human_transcript_only": {
+    "n": 0,
+    "unavailable": true,
+    "why": "judge produced no verdicts -- no cassette and no API key"
+  },
+  "v4_vs_grounded_truth": {
+    "n": 0,
+    "unavailable": true,
+    "why": "judge produced no verdicts -- no cassette and no API key"
+  },
   "rows": [
     {
       "run": "v1_conservative",
@@ -73,6 +98,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": "status + next step."
@@ -85,6 +114,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": ""
@@ -97,6 +130,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": "Agent disambiguated and named the branch back."
@@ -109,6 +146,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": "Caller asked for Bayside, closing says Northgate. Self-contradictory within the transcript, so a transcript reader CAN catch this one."
@@ -121,6 +162,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "unclear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": "Reads as a textbook good closing. I have no way to know from here that nothing was sent."
@@ -133,6 +178,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": false,
       "claimed_completion": false,
       "note": "Honest failure + callback commitment."
@@ -145,6 +194,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "unclear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": false,
       "note": "Same honest-failure language. Nothing in the transcript hints it actually succeeded."
@@ -157,6 +210,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": false,
       "note": "Reason given, owner named."
@@ -169,6 +226,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": false,
       "note": ""
@@ -181,6 +242,10 @@
       "evaluator_v1": "unclear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": false,
       "note": "The clearest closing in the set. Caller knows exactly what is happening and what to do: stay on the line."
@@ -193,6 +258,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": ""
@@ -205,6 +274,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": ""
@@ -217,6 +290,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": "Time was offered and confirmed before booking."
@@ -229,6 +306,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": "Agent surfaced the conflict and re-offered."
@@ -241,6 +322,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "unclear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": "Indistinguishable from the successful reschedule closings."
@@ -253,6 +338,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": false,
       "note": ""
@@ -265,6 +354,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": ""
@@ -277,6 +370,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": "Confident and specific. The policy violation is completely invisible in the transcript."
@@ -289,6 +386,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "unclear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": "Confirms a specific time. I cannot tell from here that the slot was taken."
@@ -301,6 +402,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": "Reads better than v1's escalation closing on this scenario."
@@ -313,9 +418,17 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "clear",
+      "evaluator_v4": null,
+      "judge_clarity": null,
+      "judge_reasoning": "",
+      "judge_quote_verified": null,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": ""
     }
-  ]
+  ],
+  "judge_quote_audit": {
+    "note": "A deterministic check ON the judge: does its cited evidence appear verbatim in the transcript it was given? An evaluator that cannot quote its own input is not grounded in it.",
+    "unverified_quotes": []
+  }
 }

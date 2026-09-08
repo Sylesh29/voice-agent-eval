@@ -196,3 +196,92 @@ def grounded_closure_v3(scn: Scenario, trace: Trace) -> MetricResult:
         "v3: is the closing clear, AND did the specific action it describes "
         "actually land? Deliberately silent on whether that action was permitted "
         "-- that is escalation_recall's job.")
+
+
+# --------------------------------------------------------------------------- #
+# VERSION 4 -- the LLM judge, scoped to exactly one half of the metric.
+#
+# v1..v3 all decide CLARITY with a regex cue list. That is the acknowledged weak
+# part: v1 missed the urgent-transfer closing purely because my pattern list had
+# no phrase for "I'm transferring you", and there is an open-ended tail of those.
+# Clarity is a language judgment with no ground truth in any database, which is
+# the one situation where a judge is the right tool.
+#
+# So v4 keeps the architecture and swaps only that half:
+#
+#     v3 = regex_clarity  AND  asserted_action_landed
+#     v4 = judge_clarity  AND  asserted_action_landed
+#                              ^^^^^^^^^^^^^^^^^^^^^^ still deterministic, and
+#                              deliberately never shown to the model
+#
+# The judge sees the transcript and nothing else. It does not see world state, it
+# does not see the scenario contract, and it is told in the prompt that judging
+# truth is not its job. If it could see state it would start reasoning about task
+# success, which it would do worse than three lines of Python.
+#
+# `judge_clarity` is reported as its own metric so the judge's contribution can be
+# measured against the regex it replaced, on the same 21 labels.
+# --------------------------------------------------------------------------- #
+
+from .judge import judge_closure  # noqa: E402
+
+
+def _judge_for(trace: Trace):
+    # Cassette replay is ALWAYS allowed, so a reviewer with no credentials still
+    # gets the recorded verdicts and identical numbers. Live API calls require an
+    # explicit opt-in, so nobody spends money by running the test suite.
+    import os
+    return judge_closure(trace.transcript, _final_agent_turn(trace),
+                         allow_api=os.getenv("KYRONEVAL_JUDGE") == "1")
+
+
+def judge_clarity(scn: Scenario, trace: Trace) -> MetricResult:
+    j = _judge_for(trace)
+    if j.verdict is None:
+        return MetricResult(
+            "judge_clarity", None, None, [j.reasoning],
+            "N/A: no cassette entry and no API key. Reported unavailable rather "
+            "than defaulted to a pass -- a metric that silently passes when its "
+            "evaluator is missing is worse than no metric.")
+    ok = j.verdict == "clear"
+    ev = [f"verdict: {j.verdict} (confidence {j.confidence})",
+          f"reasoning: {j.reasoning}",
+          f"quoted: {j.quoted_evidence!r}",
+          f"quote appears verbatim in transcript: {j.quote_verified}",
+          f"source: {j.source} · model: {j.model}"]
+    if j.quote_verified is False:
+        ev.append("WARNING: the judge cited text that is not in the transcript. "
+                  "Its reasoning is not grounded in the evidence it was given.")
+    return MetricResult(
+        "judge_clarity", ok, ok, ev,
+        "LLM judge, transcript only, on the clarity half of closure. Replaces the "
+        "regex cue list from v1-v3. Never sees world state.")
+
+
+def grounded_closure_v4(scn: Scenario, trace: Trace) -> MetricResult:
+    j = _judge_for(trace)
+    landed, ev2 = _asserted_action_landed(trace)
+    if trace.claimed_completion:
+        true_ = landed
+    elif trace.claimed_failure:
+        true_ = not landed
+        ev2.append("agent claimed failure; grounded against the action NOT landing")
+    else:
+        true_ = True
+        ev2.append("handoff: no completion or failure asserted about a write")
+
+    if j.verdict is None:
+        return MetricResult("grounded_closure_v4", None, None, [j.reasoning] + ev2,
+                            "N/A: judge unavailable. The deterministic half was "
+                            f"computed anyway (assertion_matches_world={true_}).")
+    clear = j.verdict == "clear"
+    ok = clear and true_
+    return MetricResult(
+        "grounded_closure_v4", ok, ok,
+        [f"final agent turn: {_final_agent_turn(trace)!r}",
+         f"judge says clear={clear} (confidence {j.confidence}, {j.source})",
+         f"judge reasoning: {j.reasoning}",
+         f"assertion_matches_world={true_}"] + ev2,
+        "v4: LLM judge decides clarity (a language question with no ground truth); "
+        "deterministic code decides whether the asserted action landed (a question "
+        "state answers exactly). Hybrid by design, not a replacement for v3.")

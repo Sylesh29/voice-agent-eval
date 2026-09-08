@@ -44,6 +44,20 @@ uv venv --python 3.10 .venv && uv pip install --python .venv/bin/python \
 cd frontend && npm install && npm run dev     # http://localhost:3000
 ```
 
+**The LLM judge runs from a committed cassette by default — no key needed.** Recorded
+verdicts live in `artifacts/judge_cache/closure.json` and replay deterministically. To
+re-record against a live model:
+
+```bash
+export ANTHROPIC_API_KEY=...        # or OPENAI_API_KEY; provider is auto-detected
+export KYRONEVAL_JUDGE=1            # explicit opt-in, so tests never spend money
+.venv/bin/python -m kyroneval.cli run --agent v1_conservative --out ../artifacts/runs --run-id v1_conservative
+```
+
+With no key **and** no cassette entry, judge-backed metrics report **N/A — never a pass.**
+An evaluator that silently passes when its backend is unreachable turns a broken pipeline
+into a green dashboard, which is the failure mode this whole project is about.
+
 Runs are already committed under `artifacts/`, so the UI has data before you run anything.
 A test (`test_committed_artifacts_match_a_fresh_run`) fails if those artifacts drift from
 what the code now produces — I did not want a README quoting numbers the code no longer makes.
@@ -62,13 +76,13 @@ deterministic by design (see below).
 
 | | |
 |---|---|
-| **Real** | Scenario contracts, the simulated world and its state transitions, the fault injector, all six state-verified metrics, the closure evaluator and its three revisions, the human labels, the API, the database, the UI, the A/B experiment and every number quoted below. |
+| **Real** | The LLM judge on the clarity half of closure (recorded to a committed cassette so it replays with no key). Scenario contracts, the simulated world and its state transitions, the fault injector, all six state-verified metrics, the closure evaluator and its three revisions, the human labels, the API, the database, the UI, the A/B experiment and every number quoted below. |
 | **Mocked** | The agent (deterministic rule-based policy, not an LLM). The caller (deterministic slot-answerer with scripted perturbations, not an LLM patient). The EHR / pharmacy / scheduling systems. |
-| **Omitted** | Audio and any speech stack. Auth, multi-tenancy, deployment. LLM-as-judge (the seam exists at `evaluators/judge.py`; see below for why it is empty). Barge-in, disfluency, emotional escalation. |
+| **Omitted** | Audio and any speech stack. Auth, multi-tenancy, deployment. An LLM-backed *agent* or *caller*. Barge-in, disfluency, emotional escalation. |
 
-### Why no LLM anywhere
+### Where an LLM belongs here, and where it does not
 
-Not a resource constraint — a deliberate choice I would defend.
+Not a resource constraint — a deliberate placement I would defend.
 
 The failure this platform is built to catch is a **fluent, confident, entirely
 well-formed** claim that something happened when it did not. An LLM judge reading that
@@ -77,11 +91,17 @@ uselessly. For verifiable fields, deterministic checks — state comparison, for
 validation, read-after-write — dominate a judge, and the calibration section shows a
 lexical evaluator and a *human* both failing in exactly this way on the same six traces.
 
-A judge earns its cost on things with no ground truth to compare against: tone,
-condescension, whether an explanation was actually understandable. Those matter and I did
-not build them. What I would not do is use a judge for a question that state can answer.
+A judge earns its cost on the opposite kind of question: one with no ground truth to
+compare against. So there is exactly one in this repo, and it is scoped tightly.
 
-The same reasoning applies to the agent and caller. An LLM caller produces better surface
+The closure metric has two halves. *Is this closing clear to a patient?* is a language
+judgment with no answer in any database — that is the judge's. *Did the action it describes
+actually land?* is a question state answers exactly — that stays deterministic, and the
+judge is never shown world state, the scenario contract, or the tool calls. `v4 =
+judge_clarity AND asserted_action_landed`. The split is the design; see Part 3.
+
+What I would not do is point a judge at a question state can answer. The same reasoning
+applies to the agent and caller. An LLM caller produces better surface
 language and destroys reproducibility, and a cooperative LLM patient makes every agent
 look good — simulator bias that would corrupt the exact A/B comparison this platform
 exists to make. A deterministic subject means a metric that moved can be attributed to a
@@ -247,6 +267,57 @@ I would rather have two metrics each answering one question cleanly than one met
 blind spot I have to remember.
 
 Artifacts: `artifacts/calibration/closure_calibration.json`, `backend/kyroneval/labels/`.
+
+### v4 — putting an LLM judge where it actually belongs
+
+v1–v3 all decide **clarity** with a regex cue list, and that is the acknowledged weak half:
+v1 missed the urgent-transfer closing — the clearest in the set — purely because my pattern
+list had no phrase for "I'm transferring you". There is an open-ended tail of those. Clarity
+is a language judgment with no ground truth in any database, which is the one situation
+where a judge is the right tool.
+
+So v4 changes **only that half**, and keeps the architecture:
+
+```
+v3 = regex_clarity  AND  asserted_action_landed
+v4 = judge_clarity  AND  asserted_action_landed
+                         ^^^^^^^^^^^^^^^^^^^^^ still deterministic, and deliberately
+                                               never shown to the model
+```
+
+The judge sees the transcript and the closing turn. It does not see world state, the
+scenario contract, or the tool calls, and its prompt tells it explicitly that judging
+*truth* is not its job. A judge that can see state starts reasoning about task success —
+which it does worse than three lines of Python, and at a thousand times the cost.
+
+**The measurement this enables.** `caller_closure_v1` (regex clarity) and `judge_clarity`
+answer the same question from the same evidence, and my 21 transcript-only human labels
+were made from that same evidence. That is a clean head-to-head — reported in
+`/calibration` as `regex_clarity_vs_human_transcript_only` vs
+`judge_clarity_vs_human_transcript_only`. Replacing a component and *not measuring whether
+it helped* is how evaluation stacks accumulate expensive machinery nobody has validated.
+
+**Three engineering decisions worth defending:**
+
+- **Cassette, not live calls.** Every judge call is recorded to
+  `artifacts/judge_cache/closure.json`, keyed by `sha256(model | prompt_version | prompt)`.
+  A reviewer with no credentials replays the exact verdicts I got. This is not just a
+  submission convenience — a metric you cannot recompute identically cannot be
+  regression-tested, and judge outputs are the most expensive thing in any eval pipeline
+  to recompute.
+- **The prompt is versioned and frozen** (`evaluators/judge_prompt.md`). Editing it changes
+  `PROMPT_VERSION`, which changes the cassette key, which forces a re-record. A test
+  asserts this. An evaluator whose prompt can change without changing its version is an
+  evaluator whose historical scores are attributed to a prompt that no longer exists.
+- **A deterministic check on the judge itself.** The judge must return a `quoted_evidence`
+  span, and code verifies that span appears verbatim in the transcript it was given. If it
+  does not, the verdict is flagged as ungrounded. This is the project's own thesis pointed
+  at the evaluator: do not take a fluent claim as evidence that the work was done.
+
+**Unavailable is not a pass.** With no key and no cassette entry, `judge_clarity` and
+`grounded_closure_v4` report N/A and are excluded from their denominators. v3 is completely
+unaffected, and a test asserts that too — the deterministic spine must never depend on a
+network call.
 
 ---
 

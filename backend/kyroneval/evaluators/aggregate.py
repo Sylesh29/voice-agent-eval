@@ -17,6 +17,8 @@ EVALUATORS: list[Callable] = [
     closure.caller_closure_v1,
     closure.grounded_closure_v2,
     closure.grounded_closure_v3,
+    closure.judge_clarity,
+    closure.grounded_closure_v4,
 ]
 
 

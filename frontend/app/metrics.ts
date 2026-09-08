@@ -38,6 +38,14 @@ export const METRIC_META: Record<string, { label: string; question: string }> = 
     label: "Closure v2 (contract-grounded)",
     question: "Superseded — right answers for the wrong reason. See calibration.",
   },
+  judge_clarity: {
+    label: "Clarity (LLM judge)",
+    question: "Would a patient know what happens next? Language question, transcript only \u2014 the judge never sees world state.",
+  },
+  grounded_closure_v4: {
+    label: "Closure v4 (judge + grounding)",
+    question: "LLM judge decides clarity; deterministic code decides whether the asserted action landed.",
+  },
   grounded_closure_v3: {
     label: "Closure v3 (assertion-grounded)",
     question: "Is the closing clear AND did the action it describes actually land?",
@@ -47,8 +55,8 @@ export const METRIC_META: Record<string, { label: string; question: string }> = 
 export const PRIMARY = [
   "task_success", "false_completion", "critical_entity_accuracy",
   "escalation_recall", "escalation_precision", "unnecessary_staff_burden",
-  "false_failure_report", "grounded_closure_v3", "grounded_closure_v2",
-  "caller_closure_v1",
+  "false_failure_report", "grounded_closure_v4", "judge_clarity",
+  "grounded_closure_v3", "grounded_closure_v2", "caller_closure_v1",
 ];
 
 export const SLICES = [
