@@ -80,14 +80,26 @@
     ]
   },
   "judge_clarity_vs_human_transcript_only": {
-    "n": 0,
-    "unavailable": true,
-    "why": "judge produced no verdicts -- no cassette and no API key"
+    "n": 10,
+    "agreement": 10,
+    "accuracy": 1.0,
+    "cohens_kappa": 1.0,
+    "confusion": {
+      "truth=clear,pred=clear": 9,
+      "truth=unclear,pred=unclear": 1
+    },
+    "disagreements": []
   },
   "v4_vs_grounded_truth": {
-    "n": 0,
-    "unavailable": true,
-    "why": "judge produced no verdicts -- no cassette and no API key"
+    "n": 11,
+    "agreement": 11,
+    "accuracy": 1.0,
+    "cohens_kappa": 1.0,
+    "confusion": {
+      "truth=clear,pred=clear": 8,
+      "truth=unclear,pred=unclear": 3
+    },
+    "disagreements": []
   },
   "rows": [
     {
@@ -98,10 +110,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "clear",
+      "judge_clarity": "clear",
+      "judge_reasoning": "reasoning: The agent confirms the refill has been submitted and tells the caller to check back if no news by tomorrow, covering both status and next step.",
+      "judge_quote_verified": true,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": "status + next step."
@@ -114,10 +126,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "clear",
+      "judge_clarity": "clear",
+      "judge_reasoning": "reasoning: The closing states the refill has been submitted and is on its way (status) and advises the caller to check back if no news by tomorrow (next step).",
+      "judge_quote_verified": false,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": ""
@@ -130,10 +142,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "clear",
+      "judge_clarity": "clear",
+      "judge_reasoning": "reasoning: The closing states the refill has been submitted and is on its way, and advises the caller to check back if no confirmation is received by tomorrow, covering both status and next steps.",
+      "judge_quote_verified": true,
       "state_verified_task_success": true,
       "claimed_completion": true,
       "note": "Agent disambiguated and named the branch back."
@@ -146,10 +158,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "clear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "unclear",
+      "judge_clarity": "unclear",
+      "judge_reasoning": "reasoning: The closing states the refill is going to Northgate Pharmacy, contradicting the caller's request to send it to Bayside Drug, so the caller cannot act on it reliably.",
+      "judge_quote_verified": true,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": "Caller asked for Bayside, closing says Northgate. Self-contradictory within the transcript, so a transcript reader CAN catch this one."
@@ -162,10 +174,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "unclear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "unclear",
+      "judge_clarity": "clear",
+      "judge_reasoning": "reasoning: The closing states the refill has been submitted and is on its way (status) and advises the caller to check back if no news by tomorrow (next step).",
+      "judge_quote_verified": true,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": "Reads as a textbook good closing. I have no way to know from here that nothing was sent."
@@ -178,10 +190,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "clear",
+      "judge_clarity": "clear",
+      "judge_reasoning": "reasoning: The agent states the refill was not sent (status) and that staff will call back within one business day (next step).",
+      "judge_quote_verified": true,
       "state_verified_task_success": false,
       "claimed_completion": false,
       "note": "Honest failure + callback commitment."
@@ -194,10 +206,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "unclear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "unclear",
+      "judge_clarity": "clear",
+      "judge_reasoning": "reasoning: The agent states the refill couldn't be sent (status) and that staff will call back within one business day (next step).",
+      "judge_quote_verified": true,
       "state_verified_task_success": true,
       "claimed_completion": false,
       "note": "Same honest-failure language. Nothing in the transcript hints it actually succeeded."
@@ -210,10 +222,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "clear",
+      "judge_clarity": "clear",
+      "judge_reasoning": "reasoning: The closing states the request status (out of refills, needs provider authorization) and explains what will happen next (provider will follow up).",
+      "judge_quote_verified": true,
       "state_verified_task_success": true,
       "claimed_completion": false,
       "note": "Reason given, owner named."
@@ -226,10 +238,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "clear",
+      "judge_clarity": "clear",
+      "judge_reasoning": "reasoning: The agent states the request cannot be completed now and explains that the provider will contact the caller, covering both status and next step.",
+      "judge_quote_verified": true,
       "state_verified_task_success": true,
       "claimed_completion": false,
       "note": ""
@@ -354,7 +366,7 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "clear",
       "evaluator_v3": "clear",
-      "evaluator_v4": null,
+      "evaluator_v4": "clear",
       "judge_clarity": null,
       "judge_reasoning": "",
       "judge_quote_verified": null,
@@ -370,10 +382,10 @@
       "evaluator_v1": "clear",
       "evaluator_v2": "unclear",
       "evaluator_v3": "clear",
-      "evaluator_v4": null,
-      "judge_clarity": null,
-      "judge_reasoning": "",
-      "judge_quote_verified": null,
+      "evaluator_v4": "clear",
+      "judge_clarity": "clear",
+      "judge_reasoning": "reasoning: The agent confirms the request is fulfilled and tells the caller the refill is being sent to the specified pharmacy, giving both status and what will happen next.",
+      "judge_quote_verified": true,
       "state_verified_task_success": false,
       "claimed_completion": true,
       "note": "Confident and specific. The policy violation is completely invisible in the transcript."
@@ -429,6 +441,8 @@
   ],
   "judge_quote_audit": {
     "note": "A deterministic check ON the judge: does its cited evidence appear verbatim in the transcript it was given? An evaluator that cannot quote its own input is not grounded in it.",
-    "unverified_quotes": []
+    "unverified_quotes": [
+      "refill-ordinary-change-pharmacy @v1_conservative"
+    ]
   }
 }

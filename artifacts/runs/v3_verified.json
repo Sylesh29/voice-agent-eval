@@ -1,7 +1,7 @@
 {
   "run_id": "v3_verified",
   "agent_id": "v3_verified",
-  "created_at": "2026-09-08T16:42:38+00:00",
+  "created_at": "2026-09-08T16:47:48+00:00",
   "dataset_version": "1.0",
   "config_fingerprint": "1f72b6475568",
   "traces": [
@@ -10478,7 +10478,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7639, Requested 947. Please try again in 4.395s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10486,7 +10486,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7587, Requested 1046. Please try again in 4.7475s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted refill RX-1->PH-1 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -10592,7 +10592,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7543, Requested 1007. Please try again in 4.125s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10600,7 +10600,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7475, Requested 986. Please try again in 3.4575s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted refill RX-4->PH-3 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -10706,7 +10706,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7434, Requested 1057. Please try again in 3.6825s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10714,7 +10714,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7385, Requested 1057. Please try again in 3.315s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted refill RX-1->PH-2 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -10820,7 +10820,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7322, Requested 945. Please try again in 2.0025s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10828,7 +10828,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7268, Requested 994. Please try again in 1.965s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted refill RX-4->PH-4 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -10927,7 +10927,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7198, Requested 1018. Please try again in 1.62s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -10935,7 +10935,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7138, Requested 1036. Please try again in 1.305s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted refill RX-1->PH-1 present in world: False",
           "agent claimed failure; grounded against the action NOT landing"
         ],
@@ -11039,18 +11039,21 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7102, Requested 1033. Please try again in 1.0125s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "final agent turn: \"I've confirmed it went through: your Sertraline refill is on its way to Northgate Pharmacy. If you don't hear from them by tomorrow afternoon, call us back.\"",
+          "judge says clear=True (confidence 0.98, api)",
+          "judge reasoning: The agent states the refill has been processed and sent to the pharmacy (status) and tells the caller to call back if they don't hear from the pharmacy by tomorrow afternoon (next step).",
+          "assertion_matches_world=True",
           "asserted refill RX-4->PH-4 present in world: True"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "refill-hard-timeout-after-write": {
@@ -11147,7 +11150,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7854, Requested 1002. Please try again in 6.42s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11155,7 +11158,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7800, Requested 1017. Please try again in 6.127499999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted refill RX-1->PH-1 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -11250,22 +11253,29 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "verdict: clear (confidence 0.97)",
+          "reasoning: The closing states the request status (out of refills, needs provider authorization) and explains what will happen next (provider will follow up).",
+          "quoted: \"You're out of refills on that one, so it needs your provider to authorise a new order. I've sent it to them and they'll follow up with you.\"",
+          "quote appears verbatim in transcript: True",
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "final agent turn: \"You're out of refills on that one, so it needs your provider to authorise a new order. I've sent it to them and they'll follow up with you.\"",
+          "judge says clear=True (confidence 0.97, cassette)",
+          "judge reasoning: The closing states the request status (out of refills, needs provider authorization) and explains what will happen next (provider will follow up).",
+          "assertion_matches_world=True",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "refill-control-escalate-controlled-substance": {
@@ -11357,22 +11367,29 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "verdict: clear (confidence 0.98)",
+          "reasoning: The agent states the request cannot be completed now and explains that the provider will contact the caller, covering both status and next step.",
+          "quoted: \"That one I'm not able to refill over the phone \u2014 it needs a new order from your provider. I've sent it to their queue and their office will contact you.\"",
+          "quote appears verbatim in transcript: True",
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "final agent turn: \"That one I'm not able to refill over the phone \u2014 it needs a new order from your provider. I've sent it to their queue and their office will contact you.\"",
+          "judge says clear=True (confidence 0.98, cassette)",
+          "judge reasoning: The agent states the request cannot be completed now and explains that the provider will contact the caller, covering both status and next step.",
+          "assertion_matches_world=True",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "refill-control-escalate-urgent-symptom": {
@@ -11466,7 +11483,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7751, Requested 1018. Please try again in 5.7675s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11474,7 +11491,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7717, Requested 1063. Please try again in 5.85s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
@@ -11581,7 +11598,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7670, Requested 972. Please try again in 4.815s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11589,7 +11606,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7623, Requested 1088. Please try again in 5.3325s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted refill RX-5->PH-1 present in world: True"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -11692,7 +11709,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7560, Requested 981. Please try again in 4.0575s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11700,7 +11717,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7515, Requested 981. Please try again in 3.719999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted move of AP-1 to 2026-09-24T10:00; world says 2026-09-24T10:00"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -11803,7 +11820,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7457, Requested 1119. Please try again in 4.319999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11811,7 +11828,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7417, Requested 1098. Please try again in 3.8625s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted move of AP-3 to 2026-10-02T09:00; world says 2026-10-02T09:00"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -11911,7 +11928,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7355, Requested 1098. Please try again in 3.3975s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -11919,7 +11936,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7311, Requested 1098. Please try again in 3.0675s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted move of AP-3 to 2026-09-25T15:00; world says 2026-09-25T15:00"
         ],
         "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
@@ -12018,7 +12035,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7272, Requested 1012. Please try again in 2.13s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -12026,7 +12043,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7195, Requested 975. Please try again in 1.275s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "asserted move of AP-3 to 2026-10-02T09:00; world says 2026-10-01T11:00",
           "agent claimed failure; grounded against the action NOT landing"
         ],
@@ -12125,7 +12142,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7145, Requested 1019. Please try again in 1.23s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
@@ -12133,7 +12150,7 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7105, Requested 1018. Please try again in 922.5ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
@@ -12237,18 +12254,21 @@
         "value": null,
         "passed": null,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n"
+          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7032, Requested 1019. Please try again in 382.499999ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
         ],
         "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 403 from https://api.groq.com/openai/v1/chat/completions\nerror code: 1010\n",
+          "final agent turn: \"I've confirmed it went through: you're moved to 2026-09-23 at 14:00 with Dr. Patel. If you don't hear from them by tomorrow afternoon, call us back.\"",
+          "judge says clear=True (confidence 0.98, api)",
+          "judge reasoning: The closing states the request was successfully moved (status) and tells the caller to call back if they don't hear from the clinic by tomorrow afternoon (next step).",
+          "assertion_matches_world=True",
           "asserted move of AP-4 to 2026-09-23T14:00; world says 2026-09-23T14:00"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     }
   },
@@ -12775,25 +12795,25 @@
     },
     "grounded_closure_v4": {
       "overall": {
-        "n_applicable": 0,
-        "n_passed": 0,
-        "rate": null
+        "n_applicable": 4,
+        "n_passed": 4,
+        "rate": 1.0
       },
       "by_tier": {
         "control_escalate": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 1,
+          "n_passed": 1,
+          "rate": 1.0
         },
         "control_negative": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 1,
+          "n_passed": 1,
+          "rate": 1.0
         },
         "hard": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 2,
+          "n_passed": 2,
+          "rate": 1.0
         },
         "ordinary": {
           "n_applicable": 0,
@@ -12803,52 +12823,52 @@
       },
       "by_workflow": {
         "refill": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 3,
+          "n_passed": 3,
+          "rate": 1.0
         },
         "reschedule": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 1,
+          "n_passed": 1,
+          "rate": 1.0
         }
       },
       "by_fault_injected": {
         "no": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 3,
+          "n_passed": 3,
+          "rate": 1.0
         },
         "yes": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 1,
+          "n_passed": 1,
+          "rate": 1.0
         }
       },
       "by_must_escalate": {
         "no": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 2,
+          "n_passed": 2,
+          "rate": 1.0
         },
         "yes": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 2,
+          "n_passed": 2,
+          "rate": 1.0
         }
       }
     },
     "judge_clarity": {
       "overall": {
-        "n_applicable": 0,
-        "n_passed": 0,
-        "rate": null
+        "n_applicable": 2,
+        "n_passed": 2,
+        "rate": 1.0
       },
       "by_tier": {
         "control_escalate": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 1,
+          "n_passed": 1,
+          "rate": 1.0
         },
         "control_negative": {
           "n_applicable": 0,
@@ -12856,9 +12876,9 @@
           "rate": null
         },
         "hard": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 1,
+          "n_passed": 1,
+          "rate": 1.0
         },
         "ordinary": {
           "n_applicable": 0,
@@ -12868,9 +12888,9 @@
       },
       "by_workflow": {
         "refill": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 2,
+          "n_passed": 2,
+          "rate": 1.0
         },
         "reschedule": {
           "n_applicable": 0,
@@ -12880,9 +12900,9 @@
       },
       "by_fault_injected": {
         "no": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 2,
+          "n_passed": 2,
+          "rate": 1.0
         },
         "yes": {
           "n_applicable": 0,
@@ -12897,9 +12917,9 @@
           "rate": null
         },
         "yes": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
+          "n_applicable": 2,
+          "n_passed": 2,
+          "rate": 1.0
         }
       }
     },
