@@ -782,9 +782,10 @@ Things I found and did not fix, or cannot claim.
 11. **The closure rubric is underspecified for emergency transfers.** Found by the judge
    disagreeing with me; fix stated in the v4 results, deliberately not applied, because
    re-labelling until an evaluator agrees manufactures agreement.
-12. **The judge corrupted a pharmacy name in a cited quote** (1 of 51 calls, at 0.98
-   confidence). Caught by the quote audit. I have one instance, so I know the rate is not
-   zero and nothing more than that.
+12. **The judge corrupted a pharmacy name in a cited quote**, at 0.98 confidence — 1
+   ungrounded citation among 45 recorded verdicts. Caught by the quote audit. One instance
+   tells me the rate is not zero and nothing more than that; measuring it properly needs
+   repeated re-records, which is the judge-stability check I named and did not run.
 14. **A test passed because the network was down.**
    `test_missing_judge_is_na_never_a_pass` deleted the API-key environment variables and
    asserted the judge degrades to N/A. It passed on the machine it was written on — and it
