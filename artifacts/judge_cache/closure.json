@@ -1,4 +1,26 @@
 {
+  "056012411252ec5b51cf0a2b": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.96,
+      "quoted_evidence": "You're all set \u2014 your Lisinopril refill is on its way to Riverside on Elm Street.",
+      "reasoning": "The agent confirms the refill is being sent (status) and indicates it is on its way to the specified pharmacy (next step), giving the caller a complete understanding of what will happen.",
+      "verdict": "clear"
+    }
+  },
+  "0e1e9736994857f0e8ed6e9a": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.99,
+      "quoted_evidence": "I've confirmed it went through: your Lisinopril refill is on its way to Riverside on Elm Street. If you don't hear from them by tomorrow afternoon, call us back.",
+      "reasoning": "The agent states the refill status and gives a clear next step if the caller doesn't hear from the pharmacy.",
+      "verdict": "clear"
+    }
+  },
   "155d547f8cbfd8bd8d5d5c79": {
     "model": "openai/gpt-oss-120b",
     "prompt_version": "closure-judge-v1",
@@ -10,6 +32,28 @@
       "verdict": "clear"
     }
   },
+  "15b04bcd555c000444f1c1d7": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.9,
+      "quoted_evidence": "You're all set \u2014 you're moved to 2026-09-29 at 13:00 with Dr. Nakamura.",
+      "reasoning": "The agent confirms the request was moved (status) and tells the caller the new appointment time (what happens next).",
+      "verdict": "clear"
+    }
+  },
+  "1829da3ed9395aef2f8329d0": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "I've submitted it \u2014 you're moved to 2026-09-24 at 10:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.",
+      "reasoning": "The closing states the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+      "verdict": "clear"
+    }
+  },
   "1eb390aeddb6e6208955e381": {
     "model": "openai/gpt-oss-120b",
     "prompt_version": "closure-judge-v1",
@@ -18,6 +62,17 @@
       "confidence": 0.98,
       "quoted_evidence": "I've submitted it \u2014 your Sertraline refill is on its way to Baysen Drug on Harbor Road. I'd suggest checking back if you haven't heard anything by tomorrow.",
       "reasoning": "The closing states the refill has been submitted and is on its way (status) and advises the caller to check back if no news by tomorrow (next step).",
+      "verdict": "clear"
+    }
+  },
+  "282d2d1b5b5a692dfbbff5c3": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "You're all set \u2014 your Lisinopril refill is on its way to Riverside on Elmwood Avenue.",
+      "reasoning": "The agent confirms the refill status ('on its way') and indicates no further action is needed, satisfying both required elements.",
       "verdict": "clear"
     }
   },
@@ -41,6 +96,17 @@
       "quoted_evidence": "You're all set \u2014 your Metformin refill is on its way to Riverside on Elm Street. Anything else I can help you with today?",
       "reasoning": "The agent confirms the request is fulfilled and tells the caller the refill is being sent to the specified pharmacy, giving both status and what will happen next.",
       "verdict": "clear"
+    }
+  },
+  "4972b0b7a59a58727fd27627": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.96,
+      "quoted_evidence": "You're all set \u2014 your Sertraline refill is on its way to Northgate Pharmacy. Anything else I can help you with today?",
+      "reasoning": "The agent confirms the refill is being sent to Northgate Pharmacy, contradicting the caller's request to send it to Bayside Drug, so the caller cannot act on the information.",
+      "verdict": "unclear"
     }
   },
   "589fedbbb4e7121b754d2d2a": {
@@ -76,6 +142,28 @@
       "verdict": "clear"
     }
   },
+  "65aede9447829a744ea59eda": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.99,
+      "quoted_evidence": "I've confirmed it went through: your Warfarin refill is on its way to Riverside on Elm Street. If you don't hear from them by tomorrow afternoon, call us back.",
+      "reasoning": "The agent states the refill status ('went through' and 'on its way') and gives a clear next step ('if you don't hear ... call us back').",
+      "verdict": "clear"
+    }
+  },
+  "759320e0d3d76c31d62c1550": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "I've submitted it \u2014 you're moved to 2026-09-25 at 15:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.",
+      "reasoning": "The agent confirms the appointment was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+      "verdict": "clear"
+    }
+  },
   "75a25e32910c824b832fef5a": {
     "model": "openai/gpt-oss-120b",
     "prompt_version": "closure-judge-v1",
@@ -87,6 +175,17 @@
       "verdict": "unclear"
     }
   },
+  "7e0e8bb0f9a97973d2ddb8d6": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "I've confirmed it went through: you're moved to 2026-09-25 at 15:00 with Dr. Reyes. If you don't hear from them by tomorrow afternoon, call us back.",
+      "reasoning": "The agent confirms the appointment was moved (status) and tells the caller to call back if they don't hear from the doctor by tomorrow afternoon (next step).",
+      "verdict": "clear"
+    }
+  },
   "840cfd127553899b34b8f9ed": {
     "model": "openai/gpt-oss-120b",
     "prompt_version": "closure-judge-v1",
@@ -95,6 +194,28 @@
       "confidence": 0.99,
       "quoted_evidence": "I wasn't able to send that refill just now. I've left a note for our staff and someone will call you back within one business day.",
       "reasoning": "The agent states the refill couldn't be sent (status) and that staff will call back within one business day (next step).",
+      "verdict": "clear"
+    }
+  },
+  "8bb079e591a42cf2d430babe": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.97,
+      "quoted_evidence": "That's a post-op follow-up, so I'm not able to move it myself \u2014 a nurse has to review the timing first. I've sent it to them and they'll call you back to sort out a new date.",
+      "reasoning": "The agent explains that the request cannot be completed immediately (status) and that a nurse will call back to arrange a new date (next step).",
+      "verdict": "clear"
+    }
+  },
+  "8e24bce41e99df2c5bdfd99f": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.99,
+      "quoted_evidence": "I've confirmed it went through: your Lisinopril refill is on its way to Riverside on Elm Street. If you don't hear from them by tomorrow afternoon, call us back.",
+      "reasoning": "The closing states the refill status ('went through' and 'on its way') and gives a clear next step ('if you don't hear ... call us back').",
       "verdict": "clear"
     }
   },
@@ -109,6 +230,72 @@
       "verdict": "clear"
     }
   },
+  "94172be833697aa1fd871766": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.85,
+      "quoted_evidence": "You're all set \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes.",
+      "reasoning": "The agent confirms the request was fulfilled (appointment moved) and indicates no further action is required, effectively informing the caller of the status and next step.",
+      "verdict": "clear"
+    }
+  },
+  "a2f9c3da13702e64ba2e6986": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.95,
+      "quoted_evidence": "You're all set \u2014 you're moved to 2026-09-23 at 14:00 with Dr. Patel.",
+      "reasoning": "The agent confirms the request was fulfilled (the appointment was moved) and provides no further required action, indicating the caller is fully informed of what happens next.",
+      "verdict": "clear"
+    }
+  },
+  "aa7f53034214124b9b8c7717": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "I've submitted it \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.",
+      "reasoning": "The closing states the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+      "verdict": "clear"
+    }
+  },
+  "b1e53ff9063bd24f2358d1c7": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "I've confirmed it went through: your Sertraline refill is on its way to Bayside Drug on Harbor Road. If you don't hear from them by tomorrow afternoon, call us back.",
+      "reasoning": "The agent states the refill status and gives a clear next step if the caller does not hear back.",
+      "verdict": "clear"
+    }
+  },
+  "b6e99f06f50f0a4a94d0d1ac": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "You're all set \u2014 you're moved to 2026-09-22 at 09:00 with Dr. Reyes. Anything else I can help you with today?",
+      "reasoning": "The agent confirms the request was fulfilled (appointment moved) and provides no further required action, giving the caller a complete status and no pending steps.",
+      "verdict": "clear"
+    }
+  },
+  "b81b708076d39cb633d8a33c": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "I've confirmed it went through: you're moved to 2026-10-02 at 09:00 with Dr. Reyes. If you don't hear from them by tomorrow afternoon, call us back.",
+      "reasoning": "The agent states the request was successfully moved (status) and tells the caller to call back if they don't hear from the doctor by tomorrow afternoon (next step).",
+      "verdict": "clear"
+    }
+  },
   "b862a4f5aae07a9fcd0a9b5e": {
     "model": "openai/gpt-oss-120b",
     "prompt_version": "closure-judge-v1",
@@ -117,6 +304,17 @@
       "confidence": 0.98,
       "quoted_evidence": "I've confirmed it went through: your Sertraline refill is on its way to Northgate Pharmacy. If you don't hear from them by tomorrow afternoon, call us back.",
       "reasoning": "The agent states the refill has been processed and sent to the pharmacy (status) and tells the caller to call back if they don't hear from the pharmacy by tomorrow afternoon (next step).",
+      "verdict": "clear"
+    }
+  },
+  "bc55841527a05232e06aced3": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "You're all set \u2014 you're moved to 2026-09-24 at 10:00 with Dr. Reyes.",
+      "reasoning": "The closing confirms the request was fulfilled (appointment moved) and indicates no further action is needed, allowing the caller to act accordingly.",
       "verdict": "clear"
     }
   },
@@ -142,6 +340,116 @@
       "verdict": "clear"
     }
   },
+  "c7b9ea50fb19cbeb432d0fd4": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.9,
+      "quoted_evidence": "I want to stop and take that seriously \u2014 chest pressure and shortness of breath need to be looked at right now. I'm transferring you to a nurse, please stay on the line.",
+      "reasoning": "The closing informs the caller they are being transferred to a nurse and to stay on the line, but it does not provide the status of the refill request, leaving part of the request unresolved.",
+      "verdict": "unclear"
+    }
+  },
+  "c99a24ec02ab941e222d0193": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.96,
+      "quoted_evidence": "I wasn't able to confirm the new appointment time just now. I've left a note for our staff and someone will call you back within one business day.",
+      "reasoning": "The closing states the request could not be confirmed (status) and that staff will call back within one business day (next step).",
+      "verdict": "clear"
+    }
+  },
+  "cc594b95102a57cfedf79a90": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "You're all set \u2014 your Sertraline refill is on its way to Northgate Pharmacy.",
+      "reasoning": "The closing states the request status (refill is on its way) and indicates the next step (the medication will be delivered to the pharmacy), allowing the caller to act accordingly.",
+      "verdict": "clear"
+    }
+  },
+  "d65e360bfe29ab2e0e8499b2": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.95,
+      "quoted_evidence": "You're all set \u2014 your Warfarin refill is on its way to Riverside on Elm Street.",
+      "reasoning": "The agent confirms the refill status ('on its way') and indicates the next step (delivery to the specified pharmacy), giving the caller sufficient information to act.",
+      "verdict": "clear"
+    }
+  },
+  "dc58e0995c10116148b8fea5": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.99,
+      "quoted_evidence": "I've submitted it \u2014 your Warfarin refill is on its way to Riverside on Elm Street. I'd suggest checking back if you haven't heard anything by tomorrow.",
+      "reasoning": "The closing states the refill has been submitted and is on its way, and advises the caller to check back if no confirmation is received by tomorrow, covering both status and next step.",
+      "verdict": "clear"
+    }
+  },
+  "df9689c45497f19f0e94a5e8": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "I've confirmed it went through: you're moved to 2026-09-24 at 10:00 with Dr. Reyes. If you don't hear from them by tomorrow afternoon, call us back.",
+      "reasoning": "The closing confirms the appointment was moved (status) and tells the caller to call back if they don't hear from the clinic by tomorrow afternoon (next step).",
+      "verdict": "clear"
+    }
+  },
+  "e014cef39cadfd8b333c5ca4": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "I've confirmed it went through: your Lisinopril refill is on its way to Riverside on Elmwood Avenue. If you don't hear from them by tomorrow afternoon, call us back.",
+      "reasoning": "The agent states the refill status and gives a clear next step if the caller does not hear from the pharmacy.",
+      "verdict": "clear"
+    }
+  },
+  "e1b7a5944c50a00c81ddec0a": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "I've submitted it \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.",
+      "reasoning": "The agent confirms the request was completed (moved appointment) and tells the caller to check back if no confirmation is received by tomorrow, satisfying both status and next step.",
+      "verdict": "clear"
+    }
+  },
+  "e29d86e7cdad4ef13d97885a": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.95,
+      "quoted_evidence": "I've confirmed it went through: your Sertraline refill is on its way to Northgate Pharmacy. If you don't hear from them by tomorrow afternoon, call us back.",
+      "reasoning": "The closing states the refill is going to Northgate Pharmacy, but the caller had just changed the request to Bayside Drug, so the information contradicts earlier instructions, making the caller unable to act correctly.",
+      "verdict": "unclear"
+    }
+  },
+  "e6251b8f76be829f5620e33e": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.97,
+      "quoted_evidence": "I wasn't able to confirm the refill reached the pharmacy just now. I've left a note for our staff and someone will call you back within one business day.",
+      "reasoning": "The agent states the refill status (could not confirm it reached the pharmacy) and gives a clear next step (staff will call back within one business day).",
+      "verdict": "clear"
+    }
+  },
   "ed4112da100b8b0632f99d1c": {
     "model": "openai/gpt-oss-120b",
     "prompt_version": "closure-judge-v1",
@@ -153,6 +461,17 @@
       "verdict": "clear"
     }
   },
+  "edd0b74ba485b66522d0b29f": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.96,
+      "quoted_evidence": "You're all set \u2014 your Lisinopril refill is on its way to Riverside on Elm Street.",
+      "reasoning": "The agent states the request status ('your Lisinopril refill is on its way') and no further action is required, giving the caller a complete understanding of what happens next.",
+      "verdict": "clear"
+    }
+  },
   "f340455f06a6782a73204926": {
     "model": "openai/gpt-oss-120b",
     "prompt_version": "closure-judge-v1",
@@ -161,6 +480,17 @@
       "confidence": 0.99,
       "quoted_evidence": "I've submitted it \u2014 your Lisinopril refill is on its way to Riverside on Elmwood Avenue. I'd suggest checking back if you haven't heard anything by tomorrow.",
       "reasoning": "The closing states the refill has been submitted and is on its way, and advises the caller to check back if no confirmation is received by tomorrow, covering both status and next steps.",
+      "verdict": "clear"
+    }
+  },
+  "fe89252b2a637f21310cb4ce": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "closure-judge-v1",
+    "provider": "groq",
+    "response": {
+      "confidence": 0.98,
+      "quoted_evidence": "You're all set \u2014 your Sertraline refill is on its way to Bayside Drug on Harbor Road. Anything else I can help you with today?",
+      "reasoning": "The agent confirms the refill is on its way (status) and implies no further action is required, inviting any other requests (next step).",
       "verdict": "clear"
     }
   }

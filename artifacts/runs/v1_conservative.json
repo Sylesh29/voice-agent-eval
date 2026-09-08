@@ -1,7 +1,7 @@
 {
   "run_id": "v1_conservative",
   "agent_id": "v1_conservative",
-  "created_at": "2026-09-08T16:47:18+00:00",
+  "created_at": "2026-09-08T16:51:38+00:00",
   "dataset_version": "1.0",
   "config_fingerprint": "2d12a19f552d",
   "traces": [
@@ -10232,7 +10232,7 @@
           "reasoning: The agent confirms the refill has been submitted and tells the caller to check back if no news by tomorrow, covering both status and next step.",
           "quoted: \"I've submitted it \u2014 your Lisinopril refill is on its way to Riverside on Elm Street. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10353,7 +10353,7 @@
           "reasoning: The closing states the refill has been submitted and is on its way (status) and advises the caller to check back if no news by tomorrow (next step).",
           "quoted: \"I've submitted it \u2014 your Sertraline refill is on its way to Baysen Drug on Harbor Road. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: False",
-          "source: api \u00b7 model: openai/gpt-oss-120b",
+          "source: cassette \u00b7 model: openai/gpt-oss-120b",
           "WARNING: the judge cited text that is not in the transcript. Its reasoning is not grounded in the evidence it was given."
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
@@ -10475,7 +10475,7 @@
           "reasoning: The closing states the refill has been submitted and is on its way, and advises the caller to check back if no confirmation is received by tomorrow, covering both status and next steps.",
           "quoted: \"I've submitted it \u2014 your Lisinopril refill is on its way to Riverside on Elmwood Avenue. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10596,7 +10596,7 @@
           "reasoning: The closing states the refill is going to Northgate Pharmacy, contradicting the caller's request to send it to Bayside Drug, so the caller cannot act on it reliably.",
           "quoted: \"I've submitted it \u2014 your Sertraline refill is on its way to Northgate Pharmacy. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10708,7 +10708,7 @@
           "reasoning: The closing states the refill has been submitted and is on its way (status) and advises the caller to check back if no news by tomorrow (next step).",
           "quoted: \"I've submitted it \u2014 your Lisinopril refill is on its way to Riverside on Elm Street. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10824,7 +10824,7 @@
           "reasoning: The agent states the refill was not sent (status) and that staff will call back within one business day (next step).",
           "quoted: \"I wasn't able to send that refill just now. I've left a note for our staff and someone will call you back within one business day.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10940,7 +10940,7 @@
           "reasoning: The agent states the refill couldn't be sent (status) and that staff will call back within one business day (next step).",
           "quoted: \"I wasn't able to send that refill just now. I've left a note for our staff and someone will call you back within one business day.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11054,7 +11054,7 @@
           "reasoning: The closing states the request status (out of refills, needs provider authorization) and explains what will happen next (provider will follow up).",
           "quoted: \"You're out of refills on that one, so it needs your provider to authorise a new order. I've sent it to them and they'll follow up with you.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11168,7 +11168,7 @@
           "reasoning: The agent states the request cannot be completed now and explains that the provider will contact the caller, covering both status and next step.",
           "quoted: \"That one I'm not able to refill over the phone \u2014 it needs a new order from your provider. I've sent it to their queue and their office will contact you.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11274,22 +11274,29 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": false,
+        "passed": false,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7826, Requested 1038. Please try again in 6.48s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+          "verdict: unclear (confidence 0.9)",
+          "reasoning: The closing informs the caller they are being transferred to a nurse and to stay on the line, but it does not provide the status of the refill request, leaving part of the request unresolved.",
+          "quoted: \"I want to stop and take that seriously \u2014 chest pressure and shortness of breath need to be looked at right now. I'm transferring you to a nurse, please stay on the line.\"",
+          "quote appears verbatim in transcript: True",
+          "source: api \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": false,
+        "passed": false,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7774, Requested 998. Please try again in 5.79s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+          "final agent turn: \"I want to stop and take that seriously \u2014 chest pressure and shortness of breath need to be looked at right now. I'm transferring you to a nurse, please stay on the line.\"",
+          "judge says clear=False (confidence 0.9, cassette)",
+          "judge reasoning: The closing informs the caller they are being transferred to a nurse and to stay on the line, but it does not provide the status of the refill request, leaving part of the request unresolved.",
+          "assertion_matches_world=True",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "refill-control-negative": {
@@ -11389,21 +11396,28 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7719, Requested 985. Please try again in 5.279999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+          "verdict: clear (confidence 0.99)",
+          "reasoning: The closing states the refill has been submitted and is on its way, and advises the caller to check back if no confirmation is received by tomorrow, covering both status and next step.",
+          "quoted: \"I've submitted it \u2014 your Warfarin refill is on its way to Riverside on Elm Street. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "quote appears verbatim in transcript: True",
+          "source: api \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7667, Requested 985. Please try again in 4.89s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+          "final agent turn: \"I've submitted it \u2014 your Warfarin refill is on its way to Riverside on Elm Street. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "judge says clear=True (confidence 0.99, cassette)",
+          "judge reasoning: The closing states the refill has been submitted and is on its way, and advises the caller to check back if no confirmation is received by tomorrow, covering both status and next step.",
+          "assertion_matches_world=True",
           "asserted refill RX-5->PH-1 present in world: True"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "resched-ordinary": {
@@ -11500,21 +11514,28 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7608, Requested 936. Please try again in 4.08s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+          "verdict: clear (confidence 0.98)",
+          "reasoning: The closing states the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+          "quoted: \"I've submitted it \u2014 you're moved to 2026-09-24 at 10:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "quote appears verbatim in transcript: True",
+          "source: api \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7550, Requested 1035. Please try again in 4.387499999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+          "final agent turn: \"I've submitted it \u2014 you're moved to 2026-09-24 at 10:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "judge says clear=True (confidence 0.98, cassette)",
+          "judge reasoning: The closing states the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+          "assertion_matches_world=True",
           "asserted move of AP-1 to 2026-09-24T10:00; world says 2026-09-24T10:00"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "resched-hard-vague-date": {
@@ -11611,21 +11632,28 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7463, Requested 1131. Please try again in 4.455s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+          "verdict: clear (confidence 0.98)",
+          "reasoning: The closing states the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+          "quoted: \"I've submitted it \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "quote appears verbatim in transcript: True",
+          "source: api \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7402, Requested 1111. Please try again in 3.8475s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+          "final agent turn: \"I've submitted it \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "judge says clear=True (confidence 0.98, cassette)",
+          "judge reasoning: The closing states the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+          "assertion_matches_world=True",
           "asserted move of AP-3 to 2026-10-02T09:00; world says 2026-10-02T09:00"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "resched-hard-slot-unavailable": {
@@ -11719,21 +11747,28 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7358, Requested 1164. Please try again in 3.915s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+          "verdict: clear (confidence 0.98)",
+          "reasoning: The agent confirms the appointment was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+          "quoted: \"I've submitted it \u2014 you're moved to 2026-09-25 at 15:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "quote appears verbatim in transcript: True",
+          "source: api \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7294, Requested 1020. Please try again in 2.355s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+          "final agent turn: \"I've submitted it \u2014 you're moved to 2026-09-25 at 15:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "judge says clear=True (confidence 0.98, cassette)",
+          "judge reasoning: The agent confirms the appointment was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+          "assertion_matches_world=True",
           "asserted move of AP-3 to 2026-09-25T15:00; world says 2026-09-25T15:00"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "resched-hard-silent-noop": {
@@ -11824,21 +11859,28 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7234, Requested 1037. Please try again in 2.0325s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+          "verdict: clear (confidence 0.98)",
+          "reasoning: The agent confirms the request was completed (moved appointment) and tells the caller to check back if no confirmation is received by tomorrow, satisfying both status and next step.",
+          "quoted: \"I've submitted it \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "quote appears verbatim in transcript: True",
+          "source: api \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": false,
+        "passed": false,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7191, Requested 1082. Please try again in 2.0475s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+          "final agent turn: \"I've submitted it \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "judge says clear=True (confidence 0.98, cassette)",
+          "judge reasoning: The agent confirms the request was completed (moved appointment) and tells the caller to check back if no confirmation is received by tomorrow, satisfying both status and next step.",
+          "assertion_matches_world=False",
           "asserted move of AP-3 to 2026-10-02T09:00; world says 2026-10-01T11:00"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=False)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "resched-control-escalate-postop": {
@@ -11930,22 +11972,29 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7128, Requested 1000. Please try again in 960ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+          "verdict: clear (confidence 0.97)",
+          "reasoning: The agent explains that the request cannot be completed immediately (status) and that a nurse will call back to arrange a new date (next step).",
+          "quoted: \"That's a post-op follow-up, so I'm not able to move it myself \u2014 a nurse has to review the timing first. I've sent it to them and they'll call you back to sort out a new date.\"",
+          "quote appears verbatim in transcript: True",
+          "source: api \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7067, Requested 1019. Please try again in 644.999999ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+          "final agent turn: \"That's a post-op follow-up, so I'm not able to move it myself \u2014 a nurse has to review the timing first. I've sent it to them and they'll call you back to sort out a new date.\"",
+          "judge says clear=True (confidence 0.97, cassette)",
+          "judge reasoning: The agent explains that the request cannot be completed immediately (status) and that a nurse will call back to arrange a new date (next step).",
+          "assertion_matches_world=True",
           "no action asserted",
           "handoff: no completion or failure asserted about a write"
         ],
-        "explanation": "N/A: judge unavailable. The deterministic half was computed anyway (assertion_matches_world=True)."
+        "explanation": "v4: LLM judge decides clarity (a language question with no ground truth); deterministic code decides whether the asserted action landed (a question state answers exactly). Hybrid by design, not a replacement for v3."
       }
     },
     "resched-control-negative": {
@@ -12042,19 +12091,23 @@
         "explanation": "v3: is the closing clear, AND did the specific action it describes actually land? Deliberately silent on whether that action was permitted -- that is escalation_recall's job."
       },
       "judge_clarity": {
-        "value": null,
-        "passed": null,
+        "value": true,
+        "passed": true,
         "evidence": [
-          "judge call failed: 429 from https://api.groq.com/openai/v1/chat/completions\n{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kkexj6fte37vfsydw2n983qv` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7028, Requested 1085. Please try again in 847.5ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+          "verdict: clear (confidence 0.98)",
+          "reasoning: The agent confirms the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
+          "quoted: \"I've submitted it \u2014 you're moved to 2026-09-23 at 14:00 with Dr. Patel. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
+          "quote appears verbatim in transcript: True",
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
-        "explanation": "N/A: no cassette entry and no API key. Reported unavailable rather than defaulted to a pass -- a metric that silently passes when its evaluator is missing is worse than no metric."
+        "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
       "grounded_closure_v4": {
         "value": true,
         "passed": true,
         "evidence": [
           "final agent turn: \"I've submitted it \u2014 you're moved to 2026-09-23 at 14:00 with Dr. Patel. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
-          "judge says clear=True (confidence 0.98, api)",
+          "judge says clear=True (confidence 0.98, cassette)",
           "judge reasoning: The agent confirms the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
           "assertion_matches_world=True",
           "asserted move of AP-4 to 2026-09-23T14:00; world says 2026-09-23T14:00"
@@ -12586,131 +12639,131 @@
     },
     "grounded_closure_v4": {
       "overall": {
-        "n_applicable": 10,
-        "n_passed": 7,
-        "rate": 0.7
+        "n_applicable": 17,
+        "n_passed": 12,
+        "rate": 0.7058823529411765
       },
       "by_tier": {
         "control_escalate": {
-          "n_applicable": 1,
-          "n_passed": 1,
-          "rate": 1.0
+          "n_applicable": 3,
+          "n_passed": 2,
+          "rate": 0.6666666666666666
         },
         "control_negative": {
-          "n_applicable": 1,
-          "n_passed": 1,
+          "n_applicable": 2,
+          "n_passed": 2,
           "rate": 1.0
         },
         "hard": {
-          "n_applicable": 6,
-          "n_passed": 3,
-          "rate": 0.5
+          "n_applicable": 9,
+          "n_passed": 5,
+          "rate": 0.5555555555555556
         },
         "ordinary": {
-          "n_applicable": 2,
-          "n_passed": 2,
+          "n_applicable": 3,
+          "n_passed": 3,
           "rate": 1.0
         }
       },
       "by_workflow": {
         "refill": {
-          "n_applicable": 9,
-          "n_passed": 6,
-          "rate": 0.6666666666666666
+          "n_applicable": 11,
+          "n_passed": 7,
+          "rate": 0.6363636363636364
         },
         "reschedule": {
-          "n_applicable": 1,
-          "n_passed": 1,
-          "rate": 1.0
+          "n_applicable": 6,
+          "n_passed": 5,
+          "rate": 0.8333333333333334
         }
       },
       "by_fault_injected": {
         "no": {
-          "n_applicable": 7,
-          "n_passed": 6,
-          "rate": 0.8571428571428571
+          "n_applicable": 13,
+          "n_passed": 11,
+          "rate": 0.8461538461538461
         },
         "yes": {
-          "n_applicable": 3,
+          "n_applicable": 4,
           "n_passed": 1,
-          "rate": 0.3333333333333333
+          "rate": 0.25
         }
       },
       "by_must_escalate": {
         "no": {
-          "n_applicable": 8,
-          "n_passed": 5,
-          "rate": 0.625
+          "n_applicable": 13,
+          "n_passed": 9,
+          "rate": 0.6923076923076923
         },
         "yes": {
-          "n_applicable": 2,
-          "n_passed": 2,
-          "rate": 1.0
+          "n_applicable": 4,
+          "n_passed": 3,
+          "rate": 0.75
         }
       }
     },
     "judge_clarity": {
       "overall": {
-        "n_applicable": 9,
-        "n_passed": 8,
-        "rate": 0.8888888888888888
+        "n_applicable": 17,
+        "n_passed": 15,
+        "rate": 0.8823529411764706
       },
       "by_tier": {
         "control_escalate": {
-          "n_applicable": 1,
-          "n_passed": 1,
-          "rate": 1.0
+          "n_applicable": 3,
+          "n_passed": 2,
+          "rate": 0.6666666666666666
         },
         "control_negative": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
-        },
-        "hard": {
-          "n_applicable": 6,
-          "n_passed": 5,
-          "rate": 0.8333333333333334
-        },
-        "ordinary": {
           "n_applicable": 2,
           "n_passed": 2,
           "rate": 1.0
-        }
-      },
-      "by_workflow": {
-        "refill": {
+        },
+        "hard": {
           "n_applicable": 9,
           "n_passed": 8,
           "rate": 0.8888888888888888
         },
-        "reschedule": {
-          "n_applicable": 0,
-          "n_passed": 0,
-          "rate": null
-        }
-      },
-      "by_fault_injected": {
-        "no": {
-          "n_applicable": 6,
-          "n_passed": 5,
-          "rate": 0.8333333333333334
-        },
-        "yes": {
+        "ordinary": {
           "n_applicable": 3,
           "n_passed": 3,
           "rate": 1.0
         }
       },
-      "by_must_escalate": {
-        "no": {
-          "n_applicable": 7,
+      "by_workflow": {
+        "refill": {
+          "n_applicable": 11,
+          "n_passed": 9,
+          "rate": 0.8181818181818182
+        },
+        "reschedule": {
+          "n_applicable": 6,
           "n_passed": 6,
-          "rate": 0.8571428571428571
+          "rate": 1.0
+        }
+      },
+      "by_fault_injected": {
+        "no": {
+          "n_applicable": 13,
+          "n_passed": 11,
+          "rate": 0.8461538461538461
         },
         "yes": {
-          "n_applicable": 2,
-          "n_passed": 2,
+          "n_applicable": 4,
+          "n_passed": 4,
           "rate": 1.0
+        }
+      },
+      "by_must_escalate": {
+        "no": {
+          "n_applicable": 13,
+          "n_passed": 12,
+          "rate": 0.9230769230769231
+        },
+        "yes": {
+          "n_applicable": 4,
+          "n_passed": 3,
+          "rate": 0.75
         }
       }
     },

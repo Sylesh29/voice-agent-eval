@@ -336,6 +336,82 @@ it helped* is how evaluation stacks accumulate expensive machinery nobody has va
 unaffected, and a test asserts that too — the deterministic spine must never depend on a
 network call.
 
+### v4 results — what actually happened
+
+Judge: `openai/gpt-oss-120b` via Groq, temperature 0, transcript only.
+Prediction pre-registered in `artifacts/experiment/v4_prediction.md`, committed **before**
+the run.
+
+| Comparison | acc | κ | n | minority class |
+|---|---|---|---|---|
+| **regex clarity** vs transcript-only human | 0.905 | **−0.050** | 21/21 | 1 |
+| **judge clarity** vs transcript-only human | **0.952** | **+0.644** | 21/21 | 1 |
+| v3 (regex + grounding) vs state-aware human | 0.952 | +0.859 | 21/21 | 5 |
+| **v4 (judge + grounding)** vs state-aware human | 0.952 | **+0.877** | 21/21 | 5 |
+
+**Per the pre-registered decision rule, the judge wins and v4 stays.** It beat the regex it
+replaced on the head-to-head, and it caught `refill-hard-midcall-correction` — the caller
+asks for Bayside, the agent confirms Northgate — which the regex missed and which was v3's
+one documented residual failure.
+
+Now the four things that make this result smaller and more interesting than the table
+suggests.
+
+**1. The κ gap rests on a single trace.** The transcript-only labels are 20 clear / 1
+unclear. That one minority item *is* `midcall-correction`. The regex misses it, so κ ≈ 0;
+the judge catches it, so κ = +0.644. Every point of that difference is one trace. This is
+the same fragility that made 90% accuracy meaningless earlier in this document, and it does
+not stop being true when the number moves in my favour, so `minority_class_n` is now printed
+next to every κ.
+
+**2. My headline prediction was wrong.** I predicted the judge would fix v1's
+urgent-transfer miss. It did not — `refill-control-escalate-urgent-symptom` is the one
+trace both the regex *and* the judge still call `unclear` against my `clear` label. And
+they get there for entirely unrelated reasons: the regex had no lexical cue for "I'm
+transferring you", while the judge produced a considered argument —
+
+> *"The closing informs the caller they are being transferred to a nurse and to stay on
+> the line, but it does not provide the status of the refill request, leaving part of the
+> request unresolved."*
+
+**3. That disagreement is a defect in my rubric, not in the judge.** `RUBRIC.md` requires
+the closing to state "the status of their request". On an emergency transfer the refill
+genuinely *has* no status, and the clinically correct thing is to say nothing about it —
+cluttering that moment with pharmacy logistics would be wrong. The judge applied my rubric
+correctly to a case the rubric never anticipated. The amendment it needs: *when a call is
+escalated for a clinical emergency, the closing is judged on the emergency alone and the
+original task is explicitly out of scope.*
+
+**I did not apply that amendment.** Re-writing a rubric and re-labelling until the evaluator
+agrees is how you manufacture agreement, and the resulting number would measure my
+persistence rather than the judge. It goes down as a found defect with a stated fix, to be
+applied before the next labelling round — not retro-fitted to this one.
+
+**4. The judge hallucinated a critical entity, and deterministic code caught it.** On
+`refill-ordinary-change-pharmacy` the judge returned a correct verdict at **0.98
+confidence** and cited this as verbatim evidence:
+
+> *"…your Sertraline refill is on its way to **Baysen** Drug on Harbor Road."*
+
+The transcript says **Bayside** Drug. The pharmacy name — the critical entity of the entire
+workflow — was corrupted inside the quote, in a confidently correct verdict, 1 of 51 calls.
+No amount of reading the judge's reasoning would surface that; three lines comparing its
+citation against the transcript did, and it is flagged in `judge_quote_audit`.
+
+This is the whole argument of the submission arriving from an unexpected direction. A model
+graded a call *about sending medication to the right pharmacy* and misspelled the pharmacy
+while asserting it was quoting. **That is precisely why entity correctness is scored
+deterministically against tool arguments and never by a judge** — the evaluator you would
+have asked is the one that just got the entity wrong.
+
+**Net conclusion I would defend:** use the judge for the language question it is good at,
+never for the factual ones, and keep a deterministic check on the judge itself. v4 is a
+marginal improvement over v3 on this sample — same accuracy, marginally better κ, one
+failure mode traded for another — bought with money, latency, non-determinism, and a
+hallucination rate I can only measure because I checked. On a 21-trace sample that is not
+a strong enough result to justify the judge on the numbers alone. It is justified on the
+argument: clarity has no ground truth, and the regex's failure tail is unbounded.
+
 ---
 
 ## Part 5 — The experiment
@@ -636,6 +712,16 @@ Things I found and did not fix, or cannot claim.
    but absolute numbers do not.
 8. **Two patients carry most of the scenarios**, and both workflows are "modify one
    record". No multi-intent calls.
+9. **The closure rubric is underspecified for emergency transfers.** Found by the judge
+   disagreeing with me; fix stated in the v4 results, deliberately not applied, because
+   re-labelling until an evaluator agrees manufactures agreement.
+10. **The judge corrupted a pharmacy name in a cited quote** (1 of 51 calls, at 0.98
+   confidence). Caught by the quote audit. I have one instance, so I know the rate is not
+   zero and nothing more than that.
+11. **`compare()` silently dropped no-verdict rows** and reported accuracy 1.000 / κ 1.000
+   for the judge when 37 of 51 calls had been lost to rate limiting. Fixed — coverage is
+   now a first-class field and anything below 100% prints NOT REPORTABLE. It is in this
+   list because it shipped, briefly, in the tool built to catch exactly that.
 
 ---
 
