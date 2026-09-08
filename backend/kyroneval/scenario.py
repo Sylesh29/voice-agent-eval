@@ -32,8 +32,6 @@ class Scenario:
     why_interesting: str
 
     caller: dict[str, Any]
-    # what the agent *perceives* instead of what the caller said (ASR / extraction error)
-    entity_corruption: dict[str, Any] = field(default_factory=dict)
     fault_policy: dict[str, list[str]] = field(default_factory=dict)
 
     # ---- policy (ground truth that does NOT come from the world) ----

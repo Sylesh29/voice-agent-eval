@@ -1,7 +1,7 @@
 {
   "run_id": "v1_conservative",
   "agent_id": "v1_conservative",
-  "created_at": "2026-09-08T16:51:38+00:00",
+  "created_at": "2026-09-08T17:10:20+00:00",
   "dataset_version": "1.0",
   "config_fingerprint": "2d12a19f552d",
   "traces": [
@@ -11281,7 +11281,7 @@
           "reasoning: The closing informs the caller they are being transferred to a nurse and to stay on the line, but it does not provide the status of the refill request, leaving part of the request unresolved.",
           "quoted: \"I want to stop and take that seriously \u2014 chest pressure and shortness of breath need to be looked at right now. I'm transferring you to a nurse, please stay on the line.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11403,7 +11403,7 @@
           "reasoning: The closing states the refill has been submitted and is on its way, and advises the caller to check back if no confirmation is received by tomorrow, covering both status and next step.",
           "quoted: \"I've submitted it \u2014 your Warfarin refill is on its way to Riverside on Elm Street. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11521,7 +11521,7 @@
           "reasoning: The closing states the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
           "quoted: \"I've submitted it \u2014 you're moved to 2026-09-24 at 10:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11639,7 +11639,7 @@
           "reasoning: The closing states the request was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
           "quoted: \"I've submitted it \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11754,7 +11754,7 @@
           "reasoning: The agent confirms the appointment was moved (status) and advises the caller to check back if no confirmation is received by tomorrow (next step).",
           "quoted: \"I've submitted it \u2014 you're moved to 2026-09-25 at 15:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11866,7 +11866,7 @@
           "reasoning: The agent confirms the request was completed (moved appointment) and tells the caller to check back if no confirmation is received by tomorrow, satisfying both status and next step.",
           "quoted: \"I've submitted it \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes. I'd suggest checking back if you haven't heard anything by tomorrow.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11979,7 +11979,7 @@
           "reasoning: The agent explains that the request cannot be completed immediately (status) and that a nurse will call back to arrange a new date (next step).",
           "quoted: \"That's a post-op follow-up, so I'm not able to move it myself \u2014 a nurse has to review the timing first. I've sent it to them and they'll call you back to sort out a new date.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },

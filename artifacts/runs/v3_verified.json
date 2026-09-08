@@ -1,7 +1,7 @@
 {
   "run_id": "v3_verified",
   "agent_id": "v3_verified",
-  "created_at": "2026-09-08T16:52:43+00:00",
+  "created_at": "2026-09-08T17:10:22+00:00",
   "dataset_version": "1.0",
   "config_fingerprint": "1f72b6475568",
   "traces": [
@@ -10482,7 +10482,7 @@
           "reasoning: The agent states the refill status and gives a clear next step if the caller doesn't hear from the pharmacy.",
           "quoted: \"I've confirmed it went through: your Lisinopril refill is on its way to Riverside on Elm Street. If you don't hear from them by tomorrow afternoon, call us back.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10603,7 +10603,7 @@
           "reasoning: The agent states the refill status and gives a clear next step if the caller does not hear back.",
           "quoted: \"I've confirmed it went through: your Sertraline refill is on its way to Bayside Drug on Harbor Road. If you don't hear from them by tomorrow afternoon, call us back.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10724,7 +10724,7 @@
           "reasoning: The agent states the refill status and gives a clear next step if the caller does not hear from the pharmacy.",
           "quoted: \"I've confirmed it went through: your Lisinopril refill is on its way to Riverside on Elmwood Avenue. If you don't hear from them by tomorrow afternoon, call us back.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10845,7 +10845,7 @@
           "reasoning: The closing states the refill is going to Northgate Pharmacy, but the caller had just changed the request to Bayside Drug, so the information contradicts earlier instructions, making the caller unable to act correctly.",
           "quoted: \"I've confirmed it went through: your Sertraline refill is on its way to Northgate Pharmacy. If you don't hear from them by tomorrow afternoon, call us back.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10959,7 +10959,7 @@
           "reasoning: The agent states the refill status (could not confirm it reached the pharmacy) and gives a clear next step (staff will call back within one business day).",
           "quoted: \"I wasn't able to confirm the refill reached the pharmacy just now. I've left a note for our staff and someone will call you back within one business day.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11193,7 +11193,7 @@
           "reasoning: The closing states the refill status ('went through' and 'on its way') and gives a clear next step ('if you don't hear ... call us back').",
           "quoted: \"I've confirmed it went through: your Lisinopril refill is on its way to Riverside on Elm Street. If you don't hear from them by tomorrow afternoon, call us back.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11655,7 +11655,7 @@
           "reasoning: The agent states the refill status ('went through' and 'on its way') and gives a clear next step ('if you don't hear ... call us back').",
           "quoted: \"I've confirmed it went through: your Warfarin refill is on its way to Riverside on Elm Street. If you don't hear from them by tomorrow afternoon, call us back.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11773,7 +11773,7 @@
           "reasoning: The closing confirms the appointment was moved (status) and tells the caller to call back if they don't hear from the clinic by tomorrow afternoon (next step).",
           "quoted: \"I've confirmed it went through: you're moved to 2026-09-24 at 10:00 with Dr. Reyes. If you don't hear from them by tomorrow afternoon, call us back.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11891,7 +11891,7 @@
           "reasoning: The agent states the request was successfully moved (status) and tells the caller to call back if they don't hear from the doctor by tomorrow afternoon (next step).",
           "quoted: \"I've confirmed it went through: you're moved to 2026-10-02 at 09:00 with Dr. Reyes. If you don't hear from them by tomorrow afternoon, call us back.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -12006,7 +12006,7 @@
           "reasoning: The agent confirms the appointment was moved (status) and tells the caller to call back if they don't hear from the doctor by tomorrow afternoon (next step).",
           "quoted: \"I've confirmed it went through: you're moved to 2026-09-25 at 15:00 with Dr. Reyes. If you don't hear from them by tomorrow afternoon, call us back.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -12120,7 +12120,7 @@
           "reasoning: The closing states the request could not be confirmed (status) and that staff will call back within one business day (next step).",
           "quoted: \"I wasn't able to confirm the new appointment time just now. I've left a note for our staff and someone will call you back within one business day.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },

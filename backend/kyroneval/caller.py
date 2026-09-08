@@ -63,12 +63,12 @@ class CallerSim:
         self.trace.say("agent", text, act=act, **meta)
 
     def ask(self, agent_text: str, field: str, act: str = "request_slot") -> tuple[Any, dict | None]:
-        """Agent asks for one slot. Returns (perceived_value, volunteered_beat).
+        """Agent asks for one slot. Returns (value, volunteered_beat).
 
-        `perceived_value` is what the AGENT ends up with -- i.e. after any
-        configured entity corruption. The caller's true intent stays in
-        self.facts, which is what the evaluator scores against. That asymmetry is
-        how a misheard entity is modelled without an ASR stack.
+        The caller answers truthfully and the agent receives exactly what was said.
+        There is no perception layer: this harness does NOT model mishearing. Wrong
+        entities here arise from agent behaviour (ignoring a correction, guessing
+        past an ambiguity), never from corrupted input. See README "Known failures".
         """
         self._agent_says(agent_text, act, slot=field)
 
@@ -90,8 +90,7 @@ class CallerSim:
         if beat and beat["type"] == "urgent_symptom":
             self.trace.say("caller", beat["text"])
 
-        perceived = self.scn.entity_corruption.get(field, truth)
-        return perceived, beat
+        return truth, beat
 
     def offer(self, agent_text: str, options: list[str], field: str) -> tuple[Any, dict | None]:
         """Agent offers concrete options; caller picks the one matching its intent."""
@@ -109,8 +108,7 @@ class CallerSim:
             chosen = None
         if beat:
             self.trace.say("caller", beat["text"])
-        perceived = self.scn.entity_corruption.get(field, chosen)
-        return perceived, beat
+        return chosen, beat
 
     def inform(self, agent_text: str, act: str = "inform") -> dict | None:
         """Agent states something; caller acknowledges. Beats can still fire."""

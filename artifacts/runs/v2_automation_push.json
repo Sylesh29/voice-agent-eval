@@ -1,7 +1,7 @@
 {
   "run_id": "v2_automation_push",
   "agent_id": "v2_automation_push",
-  "created_at": "2026-09-08T16:51:45+00:00",
+  "created_at": "2026-09-08T17:10:21+00:00",
   "dataset_version": "1.0",
   "config_fingerprint": "867b68aefd55",
   "traces": [
@@ -10241,7 +10241,7 @@
           "reasoning: The agent states the request status ('your Lisinopril refill is on its way') and no further action is required, giving the caller a complete understanding of what happens next.",
           "quoted: \"You're all set \u2014 your Lisinopril refill is on its way to Riverside on Elm Street.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10362,7 +10362,7 @@
           "reasoning: The agent confirms the refill is on its way (status) and implies no further action is required, inviting any other requests (next step).",
           "quoted: \"You're all set \u2014 your Sertraline refill is on its way to Bayside Drug on Harbor Road. Anything else I can help you with today?\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10483,7 +10483,7 @@
           "reasoning: The agent confirms the refill status ('on its way') and indicates no further action is needed, satisfying both required elements.",
           "quoted: \"You're all set \u2014 your Lisinopril refill is on its way to Riverside on Elmwood Avenue.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10604,7 +10604,7 @@
           "reasoning: The agent confirms the refill is being sent to Northgate Pharmacy, contradicting the caller's request to send it to Bayside Drug, so the caller cannot act on the information.",
           "quoted: \"You're all set \u2014 your Sertraline refill is on its way to Northgate Pharmacy. Anything else I can help you with today?\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10716,7 +10716,7 @@
           "reasoning: The agent confirms the refill is being sent (status) and indicates it is on its way to the specified pharmacy (next step), giving the caller a complete understanding of what will happen.",
           "quoted: \"You're all set \u2014 your Lisinopril refill is on its way to Riverside on Elm Street.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -10834,7 +10834,7 @@
           "reasoning: The closing states the request status (refill is on its way) and indicates the next step (the medication will be delivered to the pharmacy), allowing the caller to act accordingly.",
           "quoted: \"You're all set \u2014 your Sertraline refill is on its way to Northgate Pharmacy.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11415,7 +11415,7 @@
           "reasoning: The agent confirms the refill status ('on its way') and indicates the next step (delivery to the specified pharmacy), giving the caller sufficient information to act.",
           "quoted: \"You're all set \u2014 your Warfarin refill is on its way to Riverside on Elm Street.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11533,7 +11533,7 @@
           "reasoning: The closing confirms the request was fulfilled (appointment moved) and indicates no further action is needed, allowing the caller to act accordingly.",
           "quoted: \"You're all set \u2014 you're moved to 2026-09-24 at 10:00 with Dr. Reyes.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11651,7 +11651,7 @@
           "reasoning: The agent confirms the request was fulfilled (appointment moved) and indicates no further action is required, effectively informing the caller of the status and next step.",
           "quoted: \"You're all set \u2014 you're moved to 2026-10-02 at 09:00 with Dr. Reyes.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11766,7 +11766,7 @@
           "reasoning: The agent confirms the request was fulfilled (appointment moved) and provides no further required action, giving the caller a complete status and no pending steps.",
           "quoted: \"You're all set \u2014 you're moved to 2026-09-22 at 09:00 with Dr. Reyes. Anything else I can help you with today?\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -11996,7 +11996,7 @@
           "reasoning: The agent confirms the request was moved (status) and tells the caller the new appointment time (what happens next).",
           "quoted: \"You're all set \u2014 you're moved to 2026-09-29 at 13:00 with Dr. Nakamura.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },
@@ -12114,7 +12114,7 @@
           "reasoning: The agent confirms the request was fulfilled (the appointment was moved) and provides no further required action, indicating the caller is fully informed of what happens next.",
           "quoted: \"You're all set \u2014 you're moved to 2026-09-23 at 14:00 with Dr. Patel.\"",
           "quote appears verbatim in transcript: True",
-          "source: api \u00b7 model: openai/gpt-oss-120b"
+          "source: cassette \u00b7 model: openai/gpt-oss-120b"
         ],
         "explanation": "LLM judge, transcript only, on the clarity half of closure. Replaces the regex cue list from v1-v3. Never sees world state."
       },

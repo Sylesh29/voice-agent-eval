@@ -23,6 +23,36 @@ Three consequences run through the whole submission:
 
 ---
 
+## Short summary (the four things the brief asks for)
+
+**Where the time went.** ~15 min scoping and assumptions before any code; ~45 min on the
+world model, fault-injecting tool layer and scenario dataset; ~30 min on the harness and
+agent configs; ~75 min on metrics, hand-labelling, and four evaluator revisions; ~90 min on
+the backend, API and UI; ~30 min on tests; the remainder on the experiment, the
+mix-sensitivity exhibit, the LLM judge, and this document. `TIMELOG.md` and the git history
+are the record.
+
+**What I intentionally did not complete.** An LLM-backed *agent* or *caller* (reasoned
+below — not skipped). Audio and any speech stack, including mishearing. Auth, deployment,
+multi-tenancy. Idempotency keys, which the experiment showed are needed. Tool-latency
+modelling, unsupported-task scenarios, and callback flows — all three named in Part 2 and
+all three absent; see Known Failures. No frontend tests, and no way to trigger a run from
+the UI. I chose depth on one argument over coverage of eight sections.
+
+**How I used AI.** Heavily, and I would work the same way here. It wrote most of the
+mechanical code from my specifications; I directed the design, the scenarios, the metric
+definitions, and every interpretation of a result. Full account, including where it was
+unreliable and the one decision I did not delegate, in "How I used AI".
+
+**What I would do next, in order.** Idempotency keys and re-run the fault slice — the
+experiment left that as a live open question, not a polish item. Then an LLM-backed agent
+behind the same `Agent` seam, to find out how much of this survives a non-deterministic
+subject. Then the three missing Part 2 conditions above. Then a judge-based evaluator for
+the one thing state cannot answer — whether an explanation was actually understandable —
+calibrated the same way.
+
+---
+
 ## Run it
 
 No Docker, no Postgres, no keys. Two terminals.
@@ -199,9 +229,13 @@ boundaries, and the four failure shapes above; whether two configurations behave
 differently and where.
 
 **What it cannot:** anything about audio, ASR, latency, barge-in, or how a real caller
-behaves when confused. Entity corruption is *injected* at the transcript layer rather than
-emerging from mishearing. Reproducibility was bought at the cost of surface realism, and
-the numbers do not transfer to those failure modes.
+behaves when confused. **It also does not model mishearing at all** — there is no
+perception layer, so the agent receives exactly what the caller said. Every wrong entity in
+these results comes from agent *behaviour* (ignoring a late correction, guessing past an
+ambiguity), never from corrupted input. I built a corruption hook early, never wrote a
+scenario that used it, and deleted it rather than leave a mechanism in the repo that no
+result depends on. Reproducibility was bought at the cost of surface realism, and the
+numbers do not transfer to ASR-driven failure modes.
 
 ---
 
@@ -217,6 +251,24 @@ the numbers do not transfer to those failure modes.
 | `escalation_precision` | On the rest: was a handoff manufactured? | state + policy | no |
 | `unnecessary_staff_burden` | Human work items beyond what policy required | state | no |
 | `grounded_closure_v3` | Is the closing clear **and** did the action it describes land? | transcript + state | partly |
+
+### How I would validate each metric
+
+Part 3 asks how I would validate each metric, and it is the question I found hardest —
+every one of these is only as good as an input I chose. Listed as concrete procedures, not
+intentions.
+
+| Metric | How I would validate it |
+|---|---|
+| `task_success` | Mutation-test the evaluator: corrupt the terminal world after a run and confirm the verdict flips. That only proves the *check* works. The contract itself is my belief about correct behaviour, so real validation is a policy owner signing off on `expected_terminal_state` per scenario — which is a review task, not a code task. |
+| `critical_entity_accuracy` | Inject a known-wrong entity into the tool args and confirm detection; assert N/A rather than pass when no mutating call happens (this is a test today). In production the caller's true intent is not declared, so validation becomes human annotation of a sampled set and measuring agreement against it. |
+| `false_completion` | Seed `silent_noop` and confirm it fires (a test today). The real validation is production reconciliation: compare the agent's completion claims against downstream system state on a sample, and check the metric agrees with what the pharmacy queue actually contains. If it disagrees, the metric is wrong, not the pharmacy. |
+| `false_failure_report` | Same shape, seeded with `timeout_after_write`. Production check: sample calls where the agent stated failure and confirm no downstream record exists. |
+| `escalation_recall` | This metric can only be as right as the `must_escalate` field, which is my judgment. Validate by having two policy owners independently label a sample of calls for "must this leave automation?" and measuring their agreement with each other *before* measuring the evaluator against either. If humans do not agree, the metric is not yet well defined. |
+| `escalation_precision` | Validate the N/A rule specifically — construct cases where a fault fired and the work still completed, and confirm the metric scores rather than excludes them. The rule was added after it mis-scored v3, so it needs its own adversarial cases and does not have them. |
+| `unnecessary_staff_burden` | The one metric with cheap human ground truth: show staff the tasks it flagged as unnecessary and ask whether they were. Disagreement is directly actionable — either the policy field is wrong or the metric is. |
+| `grounded_closure_v3` / `v4` | Already validated once against two hand-labelling passes (below). Ongoing: a frozen golden set re-scored on every evaluator change, tracking *agreement with labels*, not accuracy, with coverage and minority-class size reported alongside. |
+| `judge_clarity` | Two checks I would add and have not. **Stability:** re-record the same prompts N times and measure the verdict flip rate — a judge that disagrees with itself cannot be a regression gate, and the cassette hides this by construction. **Grounding:** the quote audit already runs; its unverified-citation rate should be tracked as a metric in its own right, not a footnote. It is currently 1 in 51. |
 
 **Deliberately not measured:** sentiment, generic helpfulness, conversational quality,
 latency, containment rate. Containment in particular is dangerous to optimise directly —
@@ -712,13 +764,25 @@ Things I found and did not fix, or cannot claim.
    but absolute numbers do not.
 8. **Two patients carry most of the scenarios**, and both workflows are "modify one
    record". No multi-intent calls.
-9. **The closure rubric is underspecified for emergency transfers.** Found by the judge
+9. **Three failure conditions named in Part 2 are not modelled, and I want them counted
+   as gaps rather than discovered.** (a) **Tool delays** — faults are binary, nothing in
+   `tools.py` models latency, so an agent that is correct but unusably slow scores
+   identically to a fast one. (b) **Unsupported tasks** — every scenario is a workflow the
+   agent supports; there is no "I can't help with that" path, which is a common real
+   failure and an obvious source of false completion. (c) **Callbacks** — the agent's copy
+   promises callbacks and no scenario asserts one is ever created or honoured, so that
+   promise is unverified by anything. Each is roughly one scenario plus one assertion; I
+   ran out of budget, not ideas.
+10. **Mishearing is not modelled at all.** No perception layer; wrong entities come only
+   from agent behaviour. I removed a corruption hook I had built rather than ship a
+   mechanism no result depends on.
+11. **The closure rubric is underspecified for emergency transfers.** Found by the judge
    disagreeing with me; fix stated in the v4 results, deliberately not applied, because
    re-labelling until an evaluator agrees manufactures agreement.
-10. **The judge corrupted a pharmacy name in a cited quote** (1 of 51 calls, at 0.98
+12. **The judge corrupted a pharmacy name in a cited quote** (1 of 51 calls, at 0.98
    confidence). Caught by the quote audit. I have one instance, so I know the rate is not
    zero and nothing more than that.
-11. **`compare()` silently dropped no-verdict rows** and reported accuracy 1.000 / κ 1.000
+13. **`compare()` silently dropped no-verdict rows** and reported accuracy 1.000 / κ 1.000
    for the judge when 37 of 51 calls had been lost to rate limiting. Fixed — coverage is
    now a first-class field and anything below 100% prints NOT REPORTABLE. It is in this
    list because it shipped, briefly, in the tool built to catch exactly that.
@@ -727,20 +791,11 @@ Things I found and did not fix, or cannot claim.
 
 ## Where the time went
 
-Roughly: 15 min scope and assumptions before any code · 45 min world, tools, scenarios ·
-30 min harness and agents · 45 min metrics, labelling, and three evaluator revisions ·
-90 min backend, API, and UI · 30 min tests · the rest on the experiment, the
-mix-sensitivity exhibit, and this document. `TIMELOG.md` and the git history are the
-honest record.
+Collected near the top of this document, under **Short summary**, so a reviewer finds it
+without scrolling. `TIMELOG.md` has the per-window breakdown and the git history is the
+honest record — including the two commits where I broke something and the commit that
+pre-registers the v4 prediction ahead of its result.
 
-**Intentionally not completed:** an LLM-backed agent and judge (reasoned above, not
-skipped); audio; auth and deployment; idempotency keys; a fifth and sixth workflow. I chose
-depth on one argument over coverage of eight sections.
-
-**With another eight hours, in order:** idempotency keys and re-run the fault slice, since
-that is a live open question rather than a polish item · an LLM-backed agent behind the
-same `Agent` seam, to find out how much of this survives contact with a non-deterministic
-subject · a judge-based evaluator for the one thing state cannot answer (was the
-explanation actually understandable) calibrated the same way · scenario-level ambiguity
-review, because `refill-hard-pharmacy-ambiguity` currently rewards a correct guess and I
-do not think it should.
+One correction to that summary worth making explicitly: the line "an LLM-backed agent and
+judge" appeared in an earlier draft of this section. The **judge is built and running** —
+see v4. It is the LLM-backed *agent* and *caller* that remain deliberately out of scope.
