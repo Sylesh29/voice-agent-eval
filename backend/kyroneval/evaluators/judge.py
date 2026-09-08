@@ -23,8 +23,16 @@ reviewer with no credentials, and it is also the right production design: judge 
 are expensive, and a metric you cannot recompute identically is a metric you cannot
 regression-test.
 
-No SDK dependency on purpose -- stdlib urllib against either provider's HTTP API, so the
-install list stays four packages.
+PROVIDERS
+
+Groq, Anthropic, and OpenAI. Groq is OpenAI-wire-compatible, so it shares a code path.
+No SDK dependency on purpose -- stdlib urllib against the HTTP APIs, so the install list
+stays four packages and there is nothing to pin.
+
+Quick check before spending anything:
+
+    python -m kyroneval.evaluators.judge --list-models   # what your key can actually reach
+    python -m kyroneval.evaluators.judge --smoke         # one real call, end to end
 """
 from __future__ import annotations
 
@@ -41,9 +49,18 @@ PROMPT_VERSION = "closure-judge-v1"
 CACHE = Path(__file__).resolve().parents[3] / "artifacts" / "judge_cache" / "closure.json"
 PROMPT_FILE = Path(__file__).parent / "judge_prompt.md"
 
+# Groq rotates model availability faster than the other two, so treat this default as a
+# starting point and confirm with --list-models. JUDGE_MODEL overrides it everywhere.
 DEFAULT_MODELS = {
+    "groq": "llama-3.3-70b-versatile",
     "anthropic": "claude-sonnet-4-5-20250929",
     "openai": "gpt-4o-2024-11-20",
+}
+
+PROVIDERS = {
+    "groq": ("GROQ_API_KEY", "https://api.groq.com/openai/v1"),
+    "anthropic": ("ANTHROPIC_API_KEY", "https://api.anthropic.com/v1"),
+    "openai": ("OPENAI_API_KEY", "https://api.openai.com/v1"),
 }
 
 
@@ -54,7 +71,7 @@ class JudgeVerdict:
     reasoning: str
     quoted_evidence: str
     quote_verified: bool | None  # did the quote appear verbatim in the transcript?
-    source: str                  # "cassette" | "api" | "unavailable"
+    source: str                  # "cassette" | "api" | "unavailable" | "error"
     model: str | None = None
 
 
@@ -81,41 +98,82 @@ def _key(model: str, prompt: str) -> str:
 # providers
 # --------------------------------------------------------------------------- #
 
-def _provider() -> tuple[str, str, str] | None:
-    """Returns (provider, api_key, model) or None if no credential is present."""
-    if os.getenv("ANTHROPIC_API_KEY"):
-        return ("anthropic", os.environ["ANTHROPIC_API_KEY"],
-                os.getenv("JUDGE_MODEL", DEFAULT_MODELS["anthropic"]))
-    if os.getenv("OPENAI_API_KEY"):
-        return ("openai", os.environ["OPENAI_API_KEY"],
-                os.getenv("JUDGE_MODEL", DEFAULT_MODELS["openai"]))
+def resolve_provider() -> tuple[str, str, str] | None:
+    """(provider, api_key, model), or None when no credential is present.
+
+    JUDGE_PROVIDER pins the choice; otherwise the first configured provider in
+    PROVIDERS order wins.
+    """
+    pinned = os.getenv("JUDGE_PROVIDER")
+    order = [pinned] if pinned else list(PROVIDERS)
+    for name in order:
+        if name not in PROVIDERS:
+            raise ValueError(f"unknown JUDGE_PROVIDER {name!r}; "
+                             f"expected one of {sorted(PROVIDERS)}")
+        env, _ = PROVIDERS[name]
+        if os.getenv(env):
+            return (name, os.environ[env],
+                    os.getenv("JUDGE_MODEL", DEFAULT_MODELS[name]))
     return None
 
 
-def _post(url: str, headers: dict, payload: dict) -> dict:
-    req = urllib.request.Request(
-        url, data=json.dumps(payload).encode(), headers=headers, method="POST")
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read())
+def _headers(provider: str, key: str) -> dict:
+    if provider == "anthropic":
+        return {"content-type": "application/json", "x-api-key": key,
+                "anthropic-version": "2023-06-01"}
+    return {"content-type": "application/json", "authorization": f"Bearer {key}"}
+
+
+def _request(url: str, headers: dict, payload: dict | None = None) -> dict:
+    data = json.dumps(payload).encode() if payload is not None else None
+    req = urllib.request.Request(url, data=data, headers=headers,
+                                 method="POST" if data else "GET")
+    try:
+        with urllib.request.urlopen(req, timeout=90) as r:
+            return json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        # Surface the provider's own message. A bare "HTTP 400" while debugging a
+        # model name is the single most annoying error in this whole exercise.
+        body = e.read().decode(errors="replace")[:600]
+        raise RuntimeError(f"{e.code} from {url}\n{body}") from None
+
+
+def list_models() -> list[str]:
+    prov = resolve_provider()
+    if not prov:
+        raise RuntimeError("no API key set (GROQ_API_KEY / ANTHROPIC_API_KEY / OPENAI_API_KEY)")
+    provider, key, _ = prov
+    _, base = PROVIDERS[provider]
+    d = _request(f"{base}/models", _headers(provider, key))
+    return sorted(m.get("id") or m.get("name") for m in d.get("data", []))
 
 
 def _call_api(provider: str, key: str, model: str, system: str, user: str) -> str:
-    """temperature=0 everywhere. Not determinism -- these APIs are not deterministic even
-    at 0 -- but it removes the sampling variance we can remove. The cassette is what
+    """temperature=0 everywhere. Not determinism -- none of these APIs are deterministic
+    even at 0 -- but it removes the sampling variance we can remove. The cassette is what
     actually makes results reproducible, which is the point of having one."""
+    _, base = PROVIDERS[provider]
     if provider == "anthropic":
-        d = _post("https://api.anthropic.com/v1/messages",
-                  {"content-type": "application/json", "x-api-key": key,
-                   "anthropic-version": "2023-06-01"},
-                  {"model": model, "max_tokens": 512, "temperature": 0,
-                   "system": system, "messages": [{"role": "user", "content": user}]})
+        d = _request(f"{base}/messages", _headers(provider, key),
+                     {"model": model, "max_tokens": 512, "temperature": 0,
+                      "system": system, "messages": [{"role": "user", "content": user}]})
         return d["content"][0]["text"]
-    d = _post("https://api.openai.com/v1/chat/completions",
-              {"content-type": "application/json", "authorization": f"Bearer {key}"},
-              {"model": model, "temperature": 0, "max_tokens": 512,
-               "response_format": {"type": "json_object"},
+
+    payload = {"model": model, "temperature": 0, "max_tokens": 1024,
                "messages": [{"role": "system", "content": system},
-                            {"role": "user", "content": user}]})
+                            {"role": "user", "content": user}]}
+    if provider == "openai":
+        payload["response_format"] = {"type": "json_object"}
+    else:
+        # Groq supports JSON mode on most but not all models, and rejects it loudly on
+        # the rest. Try it, fall back to prompt-enforced JSON -- `_parse` is tolerant.
+        try:
+            return _request(f"{base}/chat/completions", _headers(provider, key),
+                            {**payload, "response_format": {"type": "json_object"}}
+                            )["choices"][0]["message"]["content"]
+        except RuntimeError:
+            pass
+    d = _request(f"{base}/chat/completions", _headers(provider, key), payload)
     return d["choices"][0]["message"]["content"]
 
 
@@ -134,16 +192,38 @@ def _render(transcript: str, final_turn: str) -> str:
 
 
 def _parse(raw: str) -> dict:
-    m = re.search(r"\{.*\}", raw, re.S)
-    if not m:
-        raise ValueError(f"judge returned no JSON object: {raw[:200]}")
-    return json.loads(m.group(0))
+    """Tolerant JSON extraction.
+
+    Several Groq-hosted models are reasoning models that emit a <think> block before
+    the answer, and most models will wrap JSON in a code fence given half a chance.
+    Strip those, then take the last balanced object that parses -- last, because the
+    answer follows the reasoning.
+    """
+    s = re.sub(r"<think>.*?</think>", "", raw, flags=re.S | re.I)
+    s = re.sub(r"```(?:json)?\s*(.*?)```", r"\1", s, flags=re.S)
+    s = s.strip()
+    try:
+        return json.loads(s)
+    except json.JSONDecodeError:
+        pass
+    starts = [i for i, ch in enumerate(s) if ch == "{"]
+    for start in reversed(starts):
+        depth = 0
+        for i in range(start, len(s)):
+            depth += (s[i] == "{") - (s[i] == "}")
+            if depth == 0:
+                try:
+                    return json.loads(s[start:i + 1])
+                except json.JSONDecodeError:
+                    break
+    raise ValueError(f"judge returned no parseable JSON object: {raw[:300]}")
 
 
 def _norm(s: str) -> str:
     """Quote checking tolerates whitespace and smart punctuation, nothing else."""
-    s = s.replace("—", "-").replace("’", "'").replace("“", '"')
-    s = s.replace("”", '"').replace("–", "-")
+    for a, b in (("—", "-"), ("’", "'"), ("“", '"'),
+                 ("”", '"'), ("–", "-")):
+        s = s.replace(a, b)
     return re.sub(r"\s+", " ", s).strip().lower()
 
 
@@ -155,9 +235,9 @@ def judge_closure(transcript: str, final_turn: str, *, allow_api: bool = True) -
     prompt = _render(transcript, final_turn)
     cache = _load_cache()
 
-    prov = _provider() if allow_api else None
-    # A cassette entry is keyed by model, so replay needs to find the model that
-    # recorded it. Try the live model first, then any recorded model.
+    prov = resolve_provider() if allow_api else None
+    # A cassette entry is keyed by model, so replay has to find the model that recorded
+    # it. Try the live model first, then any model present in the cassette.
     candidates = [prov[2]] if prov else []
     candidates += [rec["model"] for rec in cache.values()]
     for model in dict.fromkeys(candidates):
@@ -171,10 +251,16 @@ def judge_closure(transcript: str, final_turn: str, *, allow_api: bool = True) -
                             "UNAVAILABLE rather than guessed.", "", None, "unavailable")
 
     provider, key, model = prov
-    raw = _call_api(provider, key, model, _system_prompt(), prompt)
-    parsed = _parse(raw)
+    try:
+        raw = _call_api(provider, key, model, _system_prompt(), prompt)
+        parsed = _parse(raw)
+    except Exception as e:
+        # A failed judge call must not take down an evaluation run, and must not
+        # become a pass. It becomes a visible N/A carrying the error.
+        return JudgeVerdict(None, None, f"judge call failed: {e}", "", None,
+                            "error", model)
     cache[_key(model, prompt)] = {"model": model, "prompt_version": PROMPT_VERSION,
-                                  "response": parsed}
+                                  "provider": provider, "response": parsed}
     _save_cache(cache)
     return _verdict_from(parsed, transcript, "api", model)
 
@@ -185,8 +271,11 @@ def _verdict_from(p: dict, transcript: str, source: str, model: str) -> JudgeVer
     # verbatim, its reasoning is not grounded in the thing it was asked to read --
     # the same argument this whole platform makes, turned on the evaluator itself.
     verified = bool(quote) and _norm(quote) in _norm(transcript)
+    verdict = p.get("verdict")
+    if verdict not in ("clear", "unclear", None):
+        verdict = None
     return JudgeVerdict(
-        verdict=p.get("verdict"),
+        verdict=verdict,
         confidence=p.get("confidence"),
         reasoning=p.get("reasoning", ""),
         quoted_evidence=quote,
@@ -194,3 +283,37 @@ def _verdict_from(p: dict, transcript: str, source: str, model: str) -> JudgeVer
         source=source,
         model=model,
     )
+
+
+# --------------------------------------------------------------------------- #
+# operator commands -- check the key and the model name before spending anything
+# --------------------------------------------------------------------------- #
+
+if __name__ == "__main__":
+    import sys
+
+    arg = sys.argv[1] if len(sys.argv) > 1 else "--smoke"
+    prov = resolve_provider()
+    if not prov:
+        sys.exit("no API key found. set GROQ_API_KEY (or ANTHROPIC_API_KEY / OPENAI_API_KEY).")
+    provider, _, model = prov
+    print(f"provider={provider}  model={model}")
+
+    if arg == "--list-models":
+        for m in list_models():
+            print(("* " if m == model else "  ") + m)
+        sys.exit(0)
+
+    demo = ("CALLER: Hi, I need a refill.\n"
+            "AGENT: I've submitted it - your Lisinopril refill is on its way to "
+            "Riverside on Elm Street. I'd suggest checking back if you haven't heard "
+            "anything by tomorrow.\nCALLER: Alright, thank you.")
+    final = demo.split("AGENT: ")[1].split("\nCALLER")[0]
+    v = judge_closure(demo, final)
+    print(f"source={v.source}  verdict={v.verdict}  confidence={v.confidence}")
+    print(f"reasoning: {v.reasoning}")
+    print(f"quote: {v.quoted_evidence!r}  verbatim_in_transcript={v.quote_verified}")
+    if v.verdict is None:
+        sys.exit(f"\nFAILED -- {v.reasoning}\n"
+                 "if this is a model-name error, run --list-models and set JUDGE_MODEL.")
+    print("\nOK - key works, model responds, JSON parses.")

@@ -49,10 +49,25 @@ verdicts live in `artifacts/judge_cache/closure.json` and replay deterministical
 re-record against a live model:
 
 ```bash
-export ANTHROPIC_API_KEY=...        # or OPENAI_API_KEY; provider is auto-detected
-export KYRONEVAL_JUDGE=1            # explicit opt-in, so tests never spend money
-.venv/bin/python -m kyroneval.cli run --agent v1_conservative --out ../artifacts/runs --run-id v1_conservative
+export GROQ_API_KEY=...             # or ANTHROPIC_API_KEY / OPENAI_API_KEY, auto-detected
+export KYRONEVAL_JUDGE=1            # explicit opt-in, so the test suite never spends money
+
+# confirm the key and model before spending anything
+.venv/bin/python -m kyroneval.evaluators.judge --list-models
+.venv/bin/python -m kyroneval.evaluators.judge --smoke
+
+for a in v1_conservative v2_automation_push v3_verified; do
+  .venv/bin/python -m kyroneval.cli run --agent $a --out ../artifacts/runs --run-id $a
+done
+.venv/bin/python -m kyroneval.calibrate
 ```
+
+Three providers are supported (`JUDGE_PROVIDER` pins one, `JUDGE_MODEL` overrides the
+model). Groq is OpenAI-wire-compatible so it shares a code path; the only real differences
+are that its hosted model list rotates — hence `--list-models` — and that several models
+on it are reasoning models that emit a `<think>` block before the answer, which the
+response parser strips. A judge call that fails or returns unparseable output becomes a
+visible **N/A carrying the error**, never a pass and never a crashed run.
 
 With no key **and** no cassette entry, judge-backed metrics report **N/A — never a pass.**
 An evaluator that silently passes when its backend is unreachable turns a broken pipeline
@@ -301,6 +316,8 @@ it helped* is how evaluation stacks accumulate expensive machinery nobody has va
 
 - **Cassette, not live calls.** Every judge call is recorded to
   `artifacts/judge_cache/closure.json`, keyed by `sha256(model | prompt_version | prompt)`.
+  The model is in the key, so swapping models re-records rather than silently attributing
+  one model's verdicts to another.
   A reviewer with no credentials replays the exact verdicts I got. This is not just a
   submission convenience — a metric you cannot recompute identically cannot be
   regression-tested, and judge outputs are the most expensive thing in any eval pipeline

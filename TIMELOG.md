@@ -13,3 +13,4 @@
 | 2:45 | 20 tests. Mix-sensitivity exhibit — the reason the aggregate moved the way it did. |
 | 3:00 | README: experiment, findings, production notes, AI use, known failures. Verified from a clean clone. |
 | 3:30 | Closure v4: LLM judge on the clarity half only, deterministic grounding untouched. Cassette record/replay, versioned prompt, quote-verification check on the judge. 25 tests. |
+| 3:45 | Groq support (OpenAI-wire-compatible), `--list-models` / `--smoke` preflight, tolerant parser for reasoning-model output. 35 tests. |
