@@ -270,7 +270,7 @@ intentions.
 | `escalation_precision` | Validate the N/A rule specifically — construct cases where a fault fired and the work still completed, and confirm the metric scores rather than excludes them. The rule was added after it mis-scored v3, so it needs its own adversarial cases and does not have them. |
 | `unnecessary_staff_burden` | The one metric with cheap human ground truth: show staff the tasks it flagged as unnecessary and ask whether they were. Disagreement is directly actionable — either the policy field is wrong or the metric is. |
 | `grounded_closure_v3` / `v4` | Already validated once against two hand-labelling passes (below). Ongoing: a frozen golden set re-scored on every evaluator change, tracking *agreement with labels*, not accuracy, with coverage and minority-class size reported alongside. |
-| `judge_clarity` | Two checks I would add and have not. **Stability:** re-record the same prompts N times and measure the verdict flip rate — a judge that disagrees with itself cannot be a regression gate, and the cassette hides this by construction. **Grounding:** the quote audit already runs; its unverified-citation rate should be tracked as a metric in its own right, not a footnote. It is currently 1 in 51. |
+| `judge_clarity` | Two checks I would add and have not. **Stability:** re-record the same prompts N times and measure the verdict flip rate — a judge that disagrees with itself cannot be a regression gate, and the cassette hides this by construction. **Grounding:** the quote audit already runs; its unverified-citation rate should be tracked as a metric in its own right, not a footnote. It is currently 1 in 45 recorded verdicts. |
 
 **Deliberately not measured:** sentiment, generic helpfulness, conversational quality,
 latency, containment rate. Containment in particular is dangerous to optimise directly —
@@ -448,7 +448,8 @@ confidence** and cited this as verbatim evidence:
 > *"…your Sertraline refill is on its way to **Baysen** Drug on Harbor Road."*
 
 The transcript says **Bayside** Drug. The pharmacy name — the critical entity of the entire
-workflow — was corrupted inside the quote, in a confidently correct verdict, 1 of 51 calls.
+workflow — was corrupted inside the quote, in a confidently correct verdict: 1 ungrounded
+citation among the 45 recorded verdicts.
 No amount of reading the judge's reasoning would surface that; three lines comparing its
 citation against the transcript did, and it is flagged in `judge_quote_audit`.
 
