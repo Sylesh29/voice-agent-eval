@@ -784,6 +784,18 @@ Things I found and did not fix, or cannot claim.
 12. **The judge corrupted a pharmacy name in a cited quote** (1 of 51 calls, at 0.98
    confidence). Caught by the quote audit. I have one instance, so I know the rate is not
    zero and nothing more than that.
+14. **A test passed because the network was down.**
+   `test_missing_judge_is_na_never_a_pass` deleted the API-key environment variables and
+   asserted the judge degrades to N/A. It passed on the machine it was written on — and it
+   passed for the wrong reason: that machine's egress blocked the provider, so the call
+   failed and produced N/A by accident. On a machine with working network, the same test
+   resolved a key from the gitignored `.env` (which the loader re-populates *after*
+   monkeypatch removes it), made a live API call, and failed. My claim that the test suite
+   never spends money was false for two commits. Fixed structurally in `tests/conftest.py`:
+   an autouse fixture strips credentials, disables the `.env` loader, and turns any outbound
+   request into a loud failure — with two tests that assert the guard itself bites. The
+   shape of this bug is the same as everything else in this document: a green tick produced
+   by missing evidence rather than by correct behaviour.
 13. **`compare()` silently dropped no-verdict rows** and reported accuracy 1.000 / κ 1.000
    for the judge when 37 of 51 calls had been lost to rate limiting. Fixed — coverage is
    now a first-class field and anything below 100% prints NOT REPORTABLE. It is in this

@@ -18,10 +18,12 @@ SCN = {s.id: s for s in Scenario.load_all()}
 
 
 @pytest.fixture
-def no_credentials(monkeypatch):
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
-    monkeypatch.delenv("KYRONEVAL_JUDGE", raising=False)
+def no_credentials():
+    """Kept for readability at the call sites. The real guarantee is the autouse
+    `no_live_api` fixture in conftest.py, which also neutralises the .env loader —
+    deleting the env var alone was not enough, and that gap made this suite's most
+    important assertion pass for the wrong reason on one machine and fail on another."""
+    return None
 
 
 def test_missing_judge_is_na_never_a_pass(no_credentials, tmp_path, monkeypatch):
@@ -274,3 +276,24 @@ def test_agreement_is_never_reported_without_its_denominator():
     for field in ("n_scored", "n_total", "n_excluded_no_verdict", "coverage",
                   "reportable", "minority_class_n"):
         assert field in src, f"compare() must expose {field}"
+
+
+def test_suite_cannot_resolve_a_credential_even_with_a_dotenv_on_disk():
+    """Direct regression test for the bug this suite's conftest was written for.
+
+    A `.env` holding a real key exists on the developer's machine. Deleting the
+    environment variable is not enough, because config.load_env() puts it back.
+    If this assertion ever fails, some test somewhere can make a live API call.
+    """
+    from pathlib import Path
+    dotenv = Path(__file__).resolve().parents[1] / ".env"
+    assert judge.resolve_provider() is None, (
+        f"a credential resolved inside the test suite "
+        f"(.env present on disk: {dotenv.exists()}) — tests can reach the network")
+
+
+def test_network_guard_is_actually_installed():
+    """The guard must bite, not just exist."""
+    import pytest as _pytest
+    with _pytest.raises(RuntimeError, match="live HTTP request"):
+        judge._request("https://example.invalid", {})
