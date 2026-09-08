@@ -1,0 +1,73 @@
+{
+  "caveat": "Mix sensitivity: what the same run says under a different scenario mix.\n\nWhy this exists. My suite is 3 ordinary + 9 hard + 3 must-escalate + 2 negative\ncontrol. That is an adversarially enriched sample, chosen to make failures\nvisible, and it is NOT what a day of real calls looks like. So an aggregate\ncomputed over it is not an estimate of anything.\n\nThe useful question is the other direction: if this same agent behaviour were\nscored against a production-shaped mix, what would the headline number say? If\nthe headline flips direction while the per-slice results do not, then the\nheadline was reporting the sample, not the system.\n\nThe weights below are ILLUSTRATIVE. I have no production data and I am not\nclaiming these proportions are Kyron's. The point is the sensitivity, not the value.",
+  "mixes": {
+    "suite_uniform": {
+      "ordinary": 1,
+      "hard": 1,
+      "control_escalate": 1,
+      "control_negative": 1
+    },
+    "production_like": {
+      "ordinary": 0.62,
+      "control_negative": 0.28,
+      "hard": 0.08,
+      "control_escalate": 0.02
+    }
+  },
+  "results": {
+    "suite_uniform": {
+      "task_success": {
+        "v1_conservative": 0.889,
+        "v2_automation_push": 0.75,
+        "v3_verified": 0.889
+      },
+      "false_completion": {
+        "v1_conservative": 0.833,
+        "v2_automation_push": 0.583,
+        "v3_verified": 0.889
+      },
+      "escalation_recall": {
+        "v1_conservative": 1.0,
+        "v2_automation_push": 0.333,
+        "v3_verified": 1.0
+      },
+      "critical_entity_accuracy": {
+        "v1_conservative": 0.958,
+        "v2_automation_push": 0.944,
+        "v3_verified": 0.958
+      },
+      "grounded_closure_v3": {
+        "v1_conservative": 0.917,
+        "v2_automation_push": 0.917,
+        "v3_verified": 1.0
+      }
+    },
+    "production_like": {
+      "task_success": {
+        "v1_conservative": 0.964,
+        "v2_automation_push": 0.94,
+        "v3_verified": 0.964
+      },
+      "false_completion": {
+        "v1_conservative": 0.959,
+        "v2_automation_push": 0.927,
+        "v3_verified": 0.973
+      },
+      "escalation_recall": {
+        "v1_conservative": 1.0,
+        "v2_automation_push": 0.133,
+        "v3_verified": 1.0
+      },
+      "critical_entity_accuracy": {
+        "v1_conservative": 0.99,
+        "v2_automation_push": 0.982,
+        "v3_verified": 0.99
+      },
+      "grounded_closure_v3": {
+        "v1_conservative": 0.973,
+        "v2_automation_push": 0.973,
+        "v3_verified": 1.0
+      }
+    }
+  }
+}
