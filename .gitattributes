@@ -1,0 +1,7 @@
+# Normalise to LF in the repository. Without this, running the pipeline on a
+# different OS from the one that committed the artifacts rewrites every line and
+# `git status` implies the results changed when only the line endings did — which
+# would undercut the reproducibility claim in the README for no reason.
+* text=auto eol=lf
+*.png binary
+*.tgz binary
