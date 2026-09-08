@@ -48,9 +48,13 @@ export default function ScenarioDetail(
           </div>
           <h1>{scn.title}</h1>
           <p className="lede">
-            <code className="mono">{scenarioId}</code> <Tier t={scn.tier} />{" "}
-            <span className="tier">{scn.workflow}</span>
-            <br />{scn.why_interesting}
+            <span style={{ display: "flex", gap: 10, alignItems: "center",
+                           flexWrap: "wrap", marginBottom: 8 }}>
+              <code className="mono">{scenarioId}</code>
+              <span className="chip"><Tier t={scn.tier} /></span>
+              <span className="chip">{scn.workflow}</span>
+            </span>
+            {scn.why_interesting}
           </p>
         </div>
       </div>
@@ -112,11 +116,11 @@ export default function ScenarioDetail(
                   <span className="tool-n">{c.name}</span>
                   <span className={`b ${c.ok ? "pass" : "fail"}`}>{c.ok ? "ok" : c.error}</span>
                   {c.fault_injected !== "ok" && (
-                    <span className="b warn" title={FAULT_COPY[c.fault_injected]}>
-                      fault: {c.fault_injected}
+                    <span className="chip" title={FAULT_COPY[c.fault_injected]}>
+                      fault · {c.fault_injected}
                     </span>
                   )}
-                  {c.attempt > 1 && <span className="b info">attempt {c.attempt}</span>}
+                  {c.attempt > 1 && <span className="chip">attempt {c.attempt}</span>}
                 </div>
                 <div className="args">{JSON.stringify(c.args)}</div>
                 {c.fault_injected !== "ok" && (
@@ -155,6 +159,40 @@ export default function ScenarioDetail(
           )}
         </div>
       </div>
+
+      {d.metrics.judge_clarity && (
+        <div className="panel" style={{ marginTop: 18 }}>
+          <div className="panel-h">
+            <h2>LLM judge</h2>
+            <span className="sub">
+              Sees the transcript only — never world state, the scenario contract, or the
+              tool calls. It decides clarity; code decides whether the write landed.
+            </span>
+          </div>
+          <div style={{ padding: "16px 18px" }}>
+            <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+              <Verdict p={d.metrics.judge_clarity.passed} />
+              {(d.metrics.judge_clarity.evidence ?? [])
+                .filter((e: string) => e.startsWith("source:"))
+                .map((e: string) => <span key={e} className="chip">{e}</span>)}
+              {(d.metrics.judge_clarity.evidence ?? [])
+                .some((e: string) => e.startsWith("WARNING")) &&
+                <span className="b fail">citation not verbatim</span>}
+            </div>
+            <ul style={{ margin: "12px 0 0", padding: 0, listStyle: "none",
+                         display: "flex", flexDirection: "column", gap: 7 }}>
+              {(d.metrics.judge_clarity.evidence ?? [])
+                .filter((e: string) => !e.startsWith("source:"))
+                .map((e: string, i: number) => (
+                  <li key={i} className={e.startsWith("WARNING") ? "" : "note"}
+                      style={e.startsWith("WARNING")
+                        ? { color: "var(--fail)", fontSize: 12.5, lineHeight: 1.6 }
+                        : { lineHeight: 1.6 }}>{e}</li>
+                ))}
+            </ul>
+          </div>
+        </div>
+      )}
 
       <div className="panel" style={{ marginTop: 20 }}>
         <div className="panel-h">

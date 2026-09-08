@@ -13,12 +13,16 @@ function CompareInner() {
   const [b, setB] = useState(sp.get("b") ?? "");
   const [d, setD] = useState<any>();
   const [err, setErr] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     get<any[]>("/api/runs").then(rs => {
       setRuns(rs);
-      if (!a) setA(rs[rs.length - 1]?.run_id ?? "");
-      if (!b) setB(rs[0]?.run_id ?? "");
+      // Default to v1 -> v2: the comparison this platform was built to show.
+      // Landing on a pair with nothing in it wastes the first ten seconds.
+      const pick = (id: string) => rs.find(r => r.agent_id === id)?.run_id;
+      if (!a) setA(pick("v1_conservative") ?? rs[rs.length - 1]?.run_id ?? "");
+      if (!b) setB(pick("v2_automation_push") ?? rs[0]?.run_id ?? "");
     }).catch(e => setErr(String(e)));
   }, []);
   useEffect(() => {
@@ -66,7 +70,13 @@ function CompareInner() {
           <div className="panel">
             <div className="panel-h">
               <h2>Metric deltas by slice</h2>
-              <span className="sub">{d.agent_a} &rarr; {d.agent_b}. pp = percentage points.</span>
+              <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+                <span className="sub">{d.agent_a} &rarr; {d.agent_b}. pp = percentage points.</span>
+                <button className={`ghost ${showAll ? "on" : ""}`}
+                        onClick={() => setShowAll(v => !v)}>
+                  {showAll ? "Only changed" : "Show unchanged"}
+                </button>
+              </div>
             </div>
             <div style={{ overflowX: "auto" }}>
               <table>
@@ -79,8 +89,13 @@ function CompareInner() {
                     .filter((row: any) => PRIMARY.includes(row.metric))
                     .sort((x: any, y: any) => PRIMARY.indexOf(x.metric) - PRIMARY.indexOf(y.metric))
                     .flatMap((row: any) => {
-                      const vis = row.slices.filter(
+                      const present = row.slices.filter(
                         (s: any) => (s.a?.n_applicable ?? 0) + (s.b?.n_applicable ?? 0) > 0);
+                      // Default to slices that actually moved. A page of "0pp" buries
+                      // the two rows that matter.
+                      const vis = showAll ? present : present.filter(
+                        (s: any) => s.slice === "overall" ||
+                          (s.a?.rate != null && s.b?.rate != null && s.a.rate !== s.b.rate));
                       return vis.map((s: any, i: number) => {
                         const worse = s.a?.rate != null && s.b?.rate != null && s.b.rate < s.a.rate;
                         return (

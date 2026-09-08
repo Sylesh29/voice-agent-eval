@@ -51,7 +51,7 @@ def runs():
             "config_fingerprint": r["config_fingerprint"],
             "headline": {m: agg[m]["overall"] for m in
                          ("task_success", "false_completion", "escalation_recall",
-                          "grounded_closure_v3") if m in agg},
+                          "grounded_closure_v4", "grounded_closure_v3") if m in agg},
         })
     return out
 

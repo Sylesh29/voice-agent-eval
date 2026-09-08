@@ -61,11 +61,11 @@ export default function RunDetail({ params }: { params: Promise<{ runId: string 
                     <td>
                       <div style={{ fontWeight: 600 }}>{METRIC_META[m]?.label ?? m}</div>
                       <div className="note" style={{ maxWidth: 340 }}>{METRIC_META[m]?.question}</div>
-                      {diverges && <span className="b warn" style={{ marginTop: 5 }}>
+                      {diverges && <span className="chip" style={{ marginTop: 6 }}>
                         aggregate hides a slice
                       </span>}
                     </td>
-                    {SLICES.map(([k]) => <td key={k}><Rate c={pick(d.aggregate, m, k)} /></td>)}
+                    {SLICES.map(([k]) => <td key={k}><Rate c={pick(d.aggregate, m, k)} meter={k === "overall"} /></td>)}
                   </tr>
                 );
               })}

@@ -8,7 +8,7 @@ const HEADLINE = [
   ["task_success", "Task success", "state-verified"],
   ["false_completion", "No false completion", "of calls that claimed success"],
   ["escalation_recall", "Escalation recall", "must-escalate slice only"],
-  ["grounded_closure_v3", "Grounded closure", "clear AND true"],
+  ["grounded_closure_v4", "Grounded closure", "judge clarity AND action landed"],
 ];
 
 export default function Runs() {
