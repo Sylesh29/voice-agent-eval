@@ -51,10 +51,11 @@ PROMPT_VERSION = "closure-judge-v1"
 CACHE = Path(__file__).resolve().parents[3] / "artifacts" / "judge_cache" / "closure.json"
 PROMPT_FILE = Path(__file__).parent / "judge_prompt.md"
 
-# Groq rotates model availability faster than the other two, so treat this default as a
-# starting point and confirm with --list-models. JUDGE_MODEL overrides it everywhere.
+# Groq rotates model availability faster than the other two, and provisioning differs
+# per account -- a Llama model available on one key 404s on another. Treat this default
+# as a starting point, confirm with --list-models, override with JUDGE_MODEL.
 DEFAULT_MODELS = {
-    "groq": "llama-3.3-70b-versatile",
+    "groq": "openai/gpt-oss-120b",
     "anthropic": "claude-sonnet-4-5-20250929",
     "openai": "gpt-4o-2024-11-20",
 }

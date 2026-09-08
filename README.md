@@ -64,9 +64,9 @@ done
 
 Three providers are supported (`JUDGE_PROVIDER` pins one, `JUDGE_MODEL` overrides the
 model). Groq is OpenAI-wire-compatible so it shares a code path; the only real differences
-are that its hosted model list rotates — hence `--list-models` — and that several models
-on it are reasoning models that emit a `<think>` block before the answer, which the
-response parser strips. A judge call that fails or returns unparseable output becomes a
+are that model provisioning differs per account — a model available on one key 404s on
+another, hence `--list-models` — and that several models on it are reasoning models that
+emit a `<think>` block before the answer, which the response parser strips. A judge call that fails or returns unparseable output becomes a
 visible **N/A carrying the error**, never a pass and never a crashed run.
 
 With no key **and** no cassette entry, judge-backed metrics report **N/A — never a pass.**
