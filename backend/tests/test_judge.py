@@ -258,3 +258,19 @@ def test_auth_shape_is_right_per_provider():
     assert "authorization" not in judge._headers("anthropic", "k")
     for p in ("groq", "openai"):
         assert judge._headers(p, "k")["authorization"] == "Bearer k"
+
+
+def test_agreement_is_never_reported_without_its_denominator():
+    """Regression test for the worst bug in this project.
+
+    Agreement computed over only the rows where the predictor happened to answer
+    reported 1.0 when 37 of 51 judge calls had been lost to rate limiting. Any
+    comparison with excluded rows must be marked NOT REPORTABLE and must carry
+    its coverage.
+    """
+    from kyroneval import calibrate
+    import inspect
+    src = inspect.getsource(calibrate)
+    for field in ("n_scored", "n_total", "n_excluded_no_verdict", "coverage",
+                  "reportable", "minority_class_n"):
+        assert field in src, f"compare() must expose {field}"

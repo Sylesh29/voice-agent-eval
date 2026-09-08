@@ -7,6 +7,7 @@ behind the README's claim that 19/21 agreement was misleading.
 from __future__ import annotations
 
 import json
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -63,19 +64,40 @@ def main() -> None:
         })
 
     def compare(pred_key: str, truth_key: str) -> dict:
+        """Agreement between two raters, ALWAYS reported with its denominator.
+
+        The first version of this function silently dropped rows where the
+        predictor produced no verdict. When 37 of 51 judge calls were lost to rate
+        limiting, it reported accuracy 1.0 / kappa 1.0 over the survivors -- a
+        perfect score that meant nothing, computed by excluding the evidence.
+
+        That is the same defect this whole platform is built to catch, in my own
+        evaluator, on a number that flattered me. So coverage is now a first-class
+        field and anything below full coverage is marked NOT REPORTABLE.
+        """
+        n_total = len(rows)
         pairs = [(r[pred_key], r[truth_key]) for r in rows if r.get(pred_key) is not None]
+        n = len(pairs)
+        excluded = n_total - n
+        base = {"n_scored": n, "n_total": n_total, "n_excluded_no_verdict": excluded,
+                "coverage": round(n / n_total, 3) if n_total else 0.0,
+                "reportable": excluded == 0 and n > 0}
         if not pairs:
-            return {"n": 0, "unavailable": True,
-                    "why": "judge produced no verdicts -- no cassette and no API key"}
+            return {**base, "unavailable": True,
+                    "why": "the predictor produced no verdicts at all"}
         p = [x for x, _ in pairs]
         t = [y for _, y in pairs]
-        n = len(pairs)
         agree = sum(x == y for x, y in zip(p, t))
-        cm = {}
+        cm: dict[str, int] = {}
         for x, y in zip(t, p):
             cm[f"truth={x},pred={y}"] = cm.get(f"truth={x},pred={y}", 0) + 1
-        return {"n": n, "agreement": agree, "accuracy": round(agree / n, 3),
-                "cohens_kappa": round(_kappa(t, p), 3), "confusion": cm,
+        minority = min(Counter(t).values()) if t else 0
+        return {**base,
+                "agreement": agree, "accuracy": round(agree / n, 3),
+                "cohens_kappa": round(_kappa(t, p), 3),
+                "minority_class_n": minority,
+                "kappa_rests_on_n_items": minority,
+                "confusion": cm,
                 "disagreements": [r["scenario"] + " @" + r["run"] for r in rows
                                   if r.get(pred_key) is not None
                                   and r[pred_key] != r[truth_key]]}
@@ -111,21 +133,36 @@ def main() -> None:
     d.mkdir(parents=True, exist_ok=True)
     (d / "closure_calibration.json").write_text(json.dumps(out, indent=2))
 
-    print("v1 vs human (both transcript-only):",
-          out["v1_vs_human_transcript_only"]["accuracy"],
-          "kappa", out["v1_vs_human_transcript_only"]["cohens_kappa"])
-    print("v1 vs grounded truth            :",
-          out["v1_vs_grounded_truth"]["accuracy"],
-          "kappa", out["v1_vs_grounded_truth"]["cohens_kappa"],
-          out["v1_vs_grounded_truth"]["disagreements"])
-    for k in ("v2_vs_grounded_truth", "v3_vs_grounded_truth",
-              "regex_clarity_vs_human_transcript_only",
-              "judge_clarity_vs_human_transcript_only", "v4_vs_grounded_truth"):
-        if out[k].get("unavailable"):
-            print(f"{k:42s}: judge unavailable (no cassette, no API key)")
-            continue
-        print(f"{k:42s}:", out[k]["accuracy"], "kappa", out[k]["cohens_kappa"],
-              out[k]["disagreements"])
+    def show(label: str, c: dict) -> None:
+        if c.get("unavailable"):
+            print(f"{label:42s}: NO VERDICTS ({c['why']})")
+            return
+        flag = "" if c["reportable"] else "   <-- NOT REPORTABLE"
+        print(f"{label:42s}: acc {c['accuracy']:.3f}  kappa {c['cohens_kappa']:+.3f}  "
+              f"n={c['n_scored']}/{c['n_total']} "
+              f"(coverage {c['coverage']:.0%}, minority class n={c['minority_class_n']})"
+              f"{flag}")
+        if not c["reportable"]:
+            print(f"{'':44s}{c['n_excluded_no_verdict']} trace(s) produced no verdict and "
+                  "were EXCLUDED. Do not quote this number.")
+        if c["disagreements"]:
+            for x in c["disagreements"]:
+                print(f"{'':46s}- {x}")
+
+    for label, k in [
+        ("v1 lexical vs human (both transcript-only)", "v1_vs_human_transcript_only"),
+        ("v1 lexical vs state-aware human", "v1_vs_grounded_truth"),
+        ("v2 contract-grounded vs state-aware", "v2_vs_grounded_truth"),
+        ("v3 assertion-grounded vs state-aware", "v3_vs_grounded_truth"),
+        ("HEAD-TO-HEAD regex clarity vs human", "regex_clarity_vs_human_transcript_only"),
+        ("HEAD-TO-HEAD judge clarity vs human", "judge_clarity_vs_human_transcript_only"),
+        ("v4 judge+grounding vs state-aware", "v4_vs_grounded_truth"),
+    ]:
+        show(label, out[k])
+
+    audit = out["judge_quote_audit"]["unverified_quotes"]
+    print(f"\njudge quote audit: {len(audit)} citation(s) NOT found verbatim in the "
+          f"transcript{': ' + ', '.join(audit) if audit else ''}")
 
 
 if __name__ == "__main__":

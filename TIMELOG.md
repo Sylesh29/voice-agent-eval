@@ -14,3 +14,4 @@
 | 3:00 | README: experiment, findings, production notes, AI use, known failures. Verified from a clean clone. |
 | 3:30 | Closure v4: LLM judge on the clarity half only, deterministic grounding untouched. Cassette record/replay, versioned prompt, quote-verification check on the judge. 25 tests. |
 | 3:45 | Groq support (OpenAI-wire-compatible), `--list-models` / `--smoke` preflight, tolerant parser for reasoning-model output. 35 tests. |
+| 4:15 | Recorded the judge against the suite. 37 of 51 calls lost to rate limiting — and calibrate reported acc 1.000 / kappa 1.000 over the survivors, because it silently dropped rows with no verdict. Caught by inspecting a result that flattered me. Fixed both: retry-with-backoff, and coverage as a first-class field with NOT REPORTABLE below 100%. |

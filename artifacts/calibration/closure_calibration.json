@@ -1,10 +1,16 @@
 {
   "what_this_shows": "Evaluator v1 and the human labeller both read only the transcript. They agree with each other almost perfectly. Both are wrong in the same direction against state-grounded truth, on exactly the traces where being wrong matters. Agreement between two blind raters measures shared blindness, not correctness.",
   "v1_vs_human_transcript_only": {
-    "n": 21,
+    "n_scored": 21,
+    "n_total": 21,
+    "n_excluded_no_verdict": 0,
+    "coverage": 1.0,
+    "reportable": true,
     "agreement": 19,
     "accuracy": 0.905,
     "cohens_kappa": -0.05,
+    "minority_class_n": 1,
+    "kappa_rests_on_n_items": 1,
     "confusion": {
       "truth=clear,pred=clear": 19,
       "truth=unclear,pred=clear": 1,
@@ -16,10 +22,16 @@
     ]
   },
   "v1_vs_grounded_truth": {
-    "n": 21,
+    "n_scored": 21,
+    "n_total": 21,
+    "n_excluded_no_verdict": 0,
+    "coverage": 1.0,
+    "reportable": true,
     "agreement": 15,
     "accuracy": 0.714,
     "cohens_kappa": -0.086,
+    "minority_class_n": 5,
+    "kappa_rests_on_n_items": 5,
     "confusion": {
       "truth=clear,pred=clear": 15,
       "truth=unclear,pred=clear": 5,
@@ -35,10 +47,16 @@
     ]
   },
   "v2_vs_grounded_truth": {
-    "n": 21,
+    "n_scored": 21,
+    "n_total": 21,
+    "n_excluded_no_verdict": 0,
+    "coverage": 1.0,
+    "reportable": true,
     "agreement": 18,
     "accuracy": 0.857,
     "cohens_kappa": 0.674,
+    "minority_class_n": 5,
+    "kappa_rests_on_n_items": 5,
     "confusion": {
       "truth=clear,pred=clear": 13,
       "truth=unclear,pred=unclear": 5,
@@ -51,10 +69,16 @@
     ]
   },
   "v3_vs_grounded_truth": {
-    "n": 21,
+    "n_scored": 21,
+    "n_total": 21,
+    "n_excluded_no_verdict": 0,
+    "coverage": 1.0,
+    "reportable": true,
     "agreement": 20,
     "accuracy": 0.952,
     "cohens_kappa": 0.859,
+    "minority_class_n": 5,
+    "kappa_rests_on_n_items": 5,
     "confusion": {
       "truth=clear,pred=clear": 16,
       "truth=unclear,pred=clear": 1,
@@ -65,10 +89,16 @@
     ]
   },
   "regex_clarity_vs_human_transcript_only": {
-    "n": 21,
+    "n_scored": 21,
+    "n_total": 21,
+    "n_excluded_no_verdict": 0,
+    "coverage": 1.0,
+    "reportable": true,
     "agreement": 19,
     "accuracy": 0.905,
     "cohens_kappa": -0.05,
+    "minority_class_n": 1,
+    "kappa_rests_on_n_items": 1,
     "confusion": {
       "truth=clear,pred=clear": 19,
       "truth=unclear,pred=clear": 1,
@@ -80,10 +110,16 @@
     ]
   },
   "judge_clarity_vs_human_transcript_only": {
-    "n": 10,
+    "n_scored": 10,
+    "n_total": 21,
+    "n_excluded_no_verdict": 11,
+    "coverage": 0.476,
+    "reportable": false,
     "agreement": 10,
     "accuracy": 1.0,
     "cohens_kappa": 1.0,
+    "minority_class_n": 1,
+    "kappa_rests_on_n_items": 1,
     "confusion": {
       "truth=clear,pred=clear": 9,
       "truth=unclear,pred=unclear": 1
@@ -91,10 +127,16 @@
     "disagreements": []
   },
   "v4_vs_grounded_truth": {
-    "n": 11,
+    "n_scored": 11,
+    "n_total": 21,
+    "n_excluded_no_verdict": 10,
+    "coverage": 0.524,
+    "reportable": false,
     "agreement": 11,
     "accuracy": 1.0,
     "cohens_kappa": 1.0,
+    "minority_class_n": 3,
+    "kappa_rests_on_n_items": 3,
     "confusion": {
       "truth=clear,pred=clear": 8,
       "truth=unclear,pred=unclear": 3

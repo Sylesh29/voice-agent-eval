@@ -40,6 +40,7 @@ import hashlib
 import json
 import os
 import re
+import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
@@ -137,27 +138,68 @@ def _headers(provider: str, key: str) -> dict:
     return {**base, "authorization": f"Bearer {key}"}
 
 
+def _retry_after(err, body: str) -> float | None:
+    """Honour the provider's own backoff instruction before guessing."""
+    hdr = err.headers.get("retry-after") if err.headers else None
+    if hdr:
+        try:
+            return float(hdr)
+        except ValueError:
+            pass
+    m = re.search(r"try again in ([0-9.]+)\s*(ms|s)\b", body, re.I)
+    if m:
+        v = float(m.group(1))
+        return v / 1000 if m.group(2).lower() == "ms" else v
+    return None
+
+
+MAX_RETRIES = int(os.getenv("JUDGE_MAX_RETRIES", "6"))
+
+
 def _request(url: str, headers: dict, payload: dict | None = None) -> dict:
+    """Retries 429 and 5xx with backoff.
+
+    Added after a 51-call recording run lost 37 calls to rate limiting -- and,
+    worse, still produced a perfect-looking calibration number because the failed
+    calls were silently excluded from the denominator. Losing calls is annoying;
+    not noticing you lost them is the actual defect.
+    """
     data = json.dumps(payload).encode() if payload is not None else None
-    req = urllib.request.Request(url, data=data, headers=headers,
-                                 method="POST" if data else "GET")
-    try:
-        with urllib.request.urlopen(req, timeout=90) as r:
-            return json.loads(r.read())
-    except urllib.error.HTTPError as e:
-        # Surface the provider's own message. A bare "HTTP 400" while debugging a
-        # model name is the single most annoying error in this whole exercise.
-        body = e.read().decode(errors="replace")[:600]
+    for attempt in range(MAX_RETRIES + 1):
+        req = urllib.request.Request(url, data=data, headers=headers,
+                                     method="POST" if data else "GET")
+        try:
+            with urllib.request.urlopen(req, timeout=90) as r:
+                return json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            body_peek = e.read().decode(errors="replace")
+            if e.code in (429, 500, 502, 503, 529) and attempt < MAX_RETRIES:
+                wait = _retry_after(e, body_peek) or min(2 ** attempt, 30)
+                time.sleep(wait + 0.25)
+                continue
+            e._peeked = body_peek  # type: ignore[attr-defined]
+            raise _http_error(e, url) from None
+    raise RuntimeError(f"exhausted {MAX_RETRIES} retries against {url}")
+
+
+def _http_error(e, url: str) -> RuntimeError:
+    """Name the likely cause. A 403 that means "your User-Agent" and a 403 that
+    means "your key" are an expensive pair to confuse."""
+    body = getattr(e, "_peeked", "")[:600]
+    if "1010" in body:
+        hint = ("\nCloudflare rejected the client signature (error 1010). NOT an auth "
+                "or model-name problem -- the User-Agent was refused.")
+    elif e.code == 429:
+        hint = ("\nRate limited even after retries. Lower the request rate, or use a "
+                "model with a higher limit (openai/gpt-oss-20b). Already-recorded "
+                "verdicts stay in the cassette, so re-running only fills the gaps.")
+    elif e.code in (401, 403):
+        hint = "\nCheck the API key, and that it belongs to the selected provider."
+    elif e.code == 404:
+        hint = "\nUsually a bad model name -- run `--list-models` and set JUDGE_MODEL."
+    else:
         hint = ""
-        if "1010" in body:
-            hint = ("\nCloudflare rejected the client signature (error 1010). This is "
-                    "NOT an auth or model-name problem -- it means the User-Agent was "
-                    "refused. Check that USER_AGENT is being sent.")
-        elif e.code in (401, 403):
-            hint = "\nCheck the API key, and that it belongs to the selected provider."
-        elif e.code == 404:
-            hint = "\nUsually a bad model name -- run `--list-models` and set JUDGE_MODEL."
-        raise RuntimeError(f"{e.code} from {url}\n{body}{hint}") from None
+    return RuntimeError(f"{e.code} from {url}\n{body}{hint}")
 
 
 def list_models() -> list[str]:
