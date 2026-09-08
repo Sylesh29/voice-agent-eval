@@ -231,6 +231,9 @@ def _judge_for(trace: Trace):
     # gets the recorded verdicts and identical numbers. Live API calls require an
     # explicit opt-in, so nobody spends money by running the test suite.
     import os
+
+    from ..config import load_env
+    load_env()
     return judge_closure(trace.transcript, _final_agent_turn(trace),
                          allow_api=os.getenv("KYRONEVAL_JUDGE") == "1")
 

@@ -6,6 +6,7 @@ passes when its backend is unreachable turns a broken pipeline into a green
 dashboard, which is the exact failure mode this whole project is about.
 """
 import json
+import os
 
 import pytest
 
@@ -157,3 +158,87 @@ def test_out_of_vocabulary_verdict_is_rejected(tmp_path, monkeypatch):
         {"verdict": "mostly clear", "confidence": 1.0, "reasoning": "r",
          "quoted_evidence": "bye"}))
     assert judge.judge_closure("CALLER: hi\nAGENT: bye", "bye").verdict is None
+
+
+# --------------------------------------------------------------------------- #
+# credential hygiene
+#
+# The assignment says plainly: do not commit API keys or credentials. That is
+# easy to honour on purpose and easy to break by accident -- a stray .env, a key
+# pasted into a config while debugging. So it is a test, not a good intention.
+# --------------------------------------------------------------------------- #
+
+import re
+import subprocess
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parents[2]
+
+SECRET_SHAPES = [
+    (r"gsk_[A-Za-z0-9]{20,}", "Groq key"),
+    (r"sk-ant-[A-Za-z0-9\-_]{20,}", "Anthropic key"),
+    (r"sk-[A-Za-z0-9]{32,}", "OpenAI key"),
+    (r"(?i)\b(api[_-]?key|secret|token)\s*[:=]\s*[\"'][^\"'\s]{16,}[\"']", "inline credential"),
+]
+
+
+def _tracked_files() -> list[Path]:
+    out = subprocess.run(["git", "ls-files", "-z"], cwd=REPO,
+                         capture_output=True, text=True, check=True).stdout
+    return [REPO / p for p in out.split("\0") if p]
+
+
+def test_no_credentials_in_any_tracked_file():
+    offenders = []
+    for path in _tracked_files():
+        if path.name == "test_judge.py" or not path.is_file():
+            continue          # this file necessarily contains the patterns themselves
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        for pattern, label in SECRET_SHAPES:
+            m = re.search(pattern, text)
+            if m:
+                offenders.append(f"{path.relative_to(REPO)}: {label} near {m.group(0)[:12]}...")
+    assert not offenders, "credentials found in tracked files:\n" + "\n".join(offenders)
+
+
+def test_dotenv_is_not_tracked():
+    tracked = {p.name for p in _tracked_files()}
+    assert ".env" not in tracked, ".env must never be committed"
+    assert ".env.example" in tracked, "the template SHOULD be committed, with empty values"
+
+
+def test_env_example_has_no_filled_values():
+    text = (REPO / "backend" / ".env.example").read_text()
+    for line in text.splitlines():
+        line = line.strip()
+        if line.startswith("#") or "=" not in line:
+            continue
+        key, _, val = line.partition("=")
+        if key.strip().endswith("_API_KEY"):
+            assert val.strip() == "", f"{key.strip()} in .env.example must be empty"
+
+
+def test_real_env_var_beats_dotenv(monkeypatch, tmp_path):
+    """An explicit export must win, or CI behaves differently from a laptop."""
+    from kyroneval import config
+    f = tmp_path / ".env"
+    f.write_text("GROQ_API_KEY=from_file\n")
+    monkeypatch.setattr(config, "SEARCH", [f])
+    monkeypatch.setattr(config, "_loaded", False)
+    monkeypatch.setenv("GROQ_API_KEY", "from_export")
+    config.load_env(force=True)
+    assert os.environ["GROQ_API_KEY"] == "from_export"
+
+
+def test_dotenv_populates_when_env_is_unset(monkeypatch, tmp_path):
+    from kyroneval import config
+    f = tmp_path / ".env"
+    f.write_text("# comment\nGROQ_API_KEY=\"from_file\"\nKYRONEVAL_JUDGE=1\n")
+    monkeypatch.setattr(config, "SEARCH", [f])
+    monkeypatch.setattr(config, "_loaded", False)
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+    config.load_env(force=True)
+    assert os.environ["GROQ_API_KEY"] == "from_file"

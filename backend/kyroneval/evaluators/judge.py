@@ -45,6 +45,8 @@ import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 
+from ..config import load_env
+
 PROMPT_VERSION = "closure-judge-v1"
 CACHE = Path(__file__).resolve().parents[3] / "artifacts" / "judge_cache" / "closure.json"
 PROMPT_FILE = Path(__file__).parent / "judge_prompt.md"
@@ -101,9 +103,13 @@ def _key(model: str, prompt: str) -> str:
 def resolve_provider() -> tuple[str, str, str] | None:
     """(provider, api_key, model), or None when no credential is present.
 
+    Reads a gitignored `.env` if one exists, so you set the key once instead of
+    exporting it every shell. Real environment variables take precedence.
+
     JUDGE_PROVIDER pins the choice; otherwise the first configured provider in
     PROVIDERS order wins.
     """
+    load_env()
     pinned = os.getenv("JUDGE_PROVIDER")
     order = [pinned] if pinned else list(PROVIDERS)
     for name in order:
