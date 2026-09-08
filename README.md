@@ -51,6 +51,11 @@ what the code now produces — I did not want a README quoting numbers the code 
 **Where to look first:** `/compare` with `v1_conservative → v2_automation_push`, then
 `/calibration`.
 
+**Reproducibility, verified:** cloned fresh and re-ran the whole pipeline — 20 tests pass
+and every committed run artifact comes back byte-identical apart from its `created_at`
+timestamp. There is no seeded randomness anywhere; the agents and the caller are
+deterministic by design (see below).
+
 ---
 
 ## What is real, mocked, and omitted

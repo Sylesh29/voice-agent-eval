@@ -9,3 +9,6 @@
 | 1:00 | Six state-verified metrics + closure v1. First full run of all three agents. Results were not what I predicted — see Experiment. |
 | 1:15 | Hand-labelled 21 traces from the transcript only, then a second pass with world state revealed. |
 | 1:45 | Closure evaluator v1 -> v2 -> v3, each revision forced by a specific disagreement I investigated. Also revised escalation_precision after it penalised correct behaviour. |
+| 2:15 | FastAPI + SQLite backend; Next.js UI (runs, sliced metrics, A/B compare, trace inspector, failure patterns, calibration, human review). |
+| 2:45 | 20 tests. Mix-sensitivity exhibit — the reason the aggregate moved the way it did. |
+| 3:00 | README: experiment, findings, production notes, AI use, known failures. Verified from a clean clone. |
