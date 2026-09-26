@@ -1,7 +1,7 @@
 """
 Credential loading.
 
-Keys live in a gitignored `.env`, never in tracked source. The assignment is explicit
+Keys live in a gitignored `.env`, never in tracked source. The rule here is explicit
 about this ("Do not commit API keys or credentials") and it is also just correct: the
 cassette in `evaluators/judge.py` means a reviewer never needs a credential at all, so
 there is no scenario where a committed key buys anything.

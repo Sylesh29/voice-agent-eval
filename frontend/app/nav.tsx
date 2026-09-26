@@ -15,7 +15,7 @@ export default function Nav() {
     <div className="top">
       <div className="wrap">
         <Link href="/" className="brand">
-          Kyron Eval <span>/ voice agent</span>
+          Voice Agent Eval <span>/ voice agent</span>
         </Link>
         <div className="nav">
           {LINKS.map(([href, label]) => (

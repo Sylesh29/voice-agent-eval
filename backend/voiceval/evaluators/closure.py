@@ -235,7 +235,7 @@ def _judge_for(trace: Trace):
     from ..config import load_env
     load_env()
     return judge_closure(trace.transcript, _final_agent_turn(trace),
-                         allow_api=os.getenv("KYRONEVAL_JUDGE") == "1")
+                         allow_api=os.getenv("VOICEVAL_JUDGE") == "1")
 
 
 def judge_clarity(scn: Scenario, trace: Trace) -> MetricResult:

@@ -12,7 +12,7 @@ the headline flips direction while the per-slice results do not, then the
 headline was reporting the sample, not the system.
 
 The weights below are ILLUSTRATIVE. I have no production data and I am not
-claiming these proportions are Kyron's. The point is the sensitivity, not the value.
+claiming these proportions are those of any real deployment. The point is the sensitivity, not the value.
 """
 from __future__ import annotations
 

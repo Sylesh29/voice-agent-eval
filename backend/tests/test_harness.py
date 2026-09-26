@@ -4,10 +4,10 @@ from pathlib import Path
 
 import pytest
 
-from kyroneval.evaluators import closure, core
-from kyroneval.runner import run_scenario, run_suite
-from kyroneval.scenario import Scenario, build_world
-from kyroneval.tools import ToolLayer
+from voiceval.evaluators import closure, core
+from voiceval.runner import run_scenario, run_suite
+from voiceval.scenario import Scenario, build_world
+from voiceval.tools import ToolLayer
 
 SCENARIOS = {s.id: s for s in Scenario.load_all()}
 

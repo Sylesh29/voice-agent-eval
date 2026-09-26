@@ -26,11 +26,11 @@ from __future__ import annotations
 
 import pytest
 
-from kyroneval import config
-from kyroneval.evaluators import judge
+from voiceval import config
+from voiceval.evaluators import judge
 
 CREDENTIAL_VARS = ("GROQ_API_KEY", "ANTHROPIC_API_KEY", "OPENAI_API_KEY",
-                   "KYRONEVAL_JUDGE", "JUDGE_PROVIDER", "JUDGE_MODEL")
+                   "VOICEVAL_JUDGE", "JUDGE_PROVIDER", "JUDGE_MODEL")
 
 
 @pytest.fixture(autouse=True)

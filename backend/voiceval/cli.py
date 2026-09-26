@@ -36,7 +36,7 @@ def cmd_run(args) -> None:
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(prog="kyroneval")
+    ap = argparse.ArgumentParser(prog="voiceval")
     sub = ap.add_subparsers(required=True)
     r = sub.add_parser("run")
     r.add_argument("--agent", required=True)

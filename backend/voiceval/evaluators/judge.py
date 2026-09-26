@@ -31,8 +31,8 @@ stays four packages and there is nothing to pin.
 
 Quick check before spending anything:
 
-    python -m kyroneval.evaluators.judge --list-models   # what your key can actually reach
-    python -m kyroneval.evaluators.judge --smoke         # one real call, end to end
+    python -m voiceval.evaluators.judge --list-models   # what your key can actually reach
+    python -m voiceval.evaluators.judge --smoke         # one real call, end to end
 """
 from __future__ import annotations
 
@@ -64,7 +64,7 @@ DEFAULT_MODELS = {
 # stdlib urllib sends "Python-urllib/3.x" by default, and Groq's Cloudflare edge
 # rejects that signature outright with HTTP 403 "error code: 1010" -- which reads
 # like an auth failure and is not one. Identify the client properly.
-USER_AGENT = "kyron-eval/0.1 (closure-judge; +https://github.com/sylesh29)"
+USER_AGENT = "voice-agent-eval/0.1 (closure-judge; +https://github.com/sylesh29)"
 
 PROVIDERS = {
     "groq": ("GROQ_API_KEY", "https://api.groq.com/openai/v1"),

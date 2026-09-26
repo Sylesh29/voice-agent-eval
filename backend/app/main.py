@@ -17,7 +17,7 @@ from pydantic import BaseModel
 
 from .db import ROOT, connect, seed
 
-app = FastAPI(title="Kyron Eval")
+app = FastAPI(title="Voice Agent Eval")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"],
                    allow_headers=["*"])
 con = connect()
@@ -25,7 +25,7 @@ seed(con)
 
 SCENARIOS = {
     s["id"]: s for s in json.loads(
-        (ROOT / "backend" / "kyroneval" / "scenarios" / "dataset.json").read_text()
+        (ROOT / "backend" / "voiceval" / "scenarios" / "dataset.json").read_text()
     )["scenarios"]
 }
 
@@ -91,7 +91,7 @@ def scenario_detail(run_id: str, scenario_id: str):
         (run_id, scenario_id)).fetchone()
     if not x:
         raise HTTPException(404, "no such result")
-    from kyroneval.agents.configs import AGENT_CONFIGS
+    from voiceval.agents.configs import AGENT_CONFIGS
     run = con.execute("SELECT agent_id FROM runs WHERE run_id=?", (run_id,)).fetchone()
     return {
         "run_id": run_id, "scenario": SCENARIOS[scenario_id],
@@ -207,7 +207,7 @@ def failure_patterns():
 def calibration():
     p = ROOT / "artifacts" / "calibration" / "closure_calibration.json"
     if not p.exists():
-        raise HTTPException(404, "run `python -m kyroneval.calibrate` first")
+        raise HTTPException(404, "run `python -m voiceval.calibrate` first")
     return json.loads(p.read_text())
 
 

@@ -1,5 +1,5 @@
 [project]
-name = "kyron-eval"
+name = "voice-agent-eval"
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = ["fastapi>=0.111", "uvicorn[standard]>=0.30", "pydantic>=2.7"]
@@ -8,4 +8,4 @@ dependencies = ["fastapi>=0.111", "uvicorn[standard]>=0.30", "pydantic>=2.7"]
 dev = ["pytest>=8.0"]
 
 [tool.setuptools.packages.find]
-include = ["kyroneval*", "app*"]
+include = ["voiceval*", "app*"]

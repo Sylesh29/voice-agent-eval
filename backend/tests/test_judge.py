@@ -10,9 +10,9 @@ import os
 
 import pytest
 
-from kyroneval.evaluators import closure, judge
-from kyroneval.runner import run_scenario
-from kyroneval.scenario import Scenario
+from voiceval.evaluators import closure, judge
+from voiceval.runner import run_scenario
+from voiceval.scenario import Scenario
 
 SCN = {s.id: s for s in Scenario.load_all()}
 
@@ -165,7 +165,7 @@ def test_out_of_vocabulary_verdict_is_rejected(tmp_path, monkeypatch):
 # --------------------------------------------------------------------------- #
 # credential hygiene
 #
-# The assignment says plainly: do not commit API keys or credentials. That is
+# The rule is plain: do not commit API keys or credentials. That is
 # easy to honour on purpose and easy to break by accident -- a stray .env, a key
 # pasted into a config while debugging. So it is a test, not a good intention.
 # --------------------------------------------------------------------------- #
@@ -252,7 +252,7 @@ def test_env_example_has_no_filled_values():
 
 def test_real_env_var_beats_dotenv(monkeypatch, tmp_path):
     """An explicit export must win, or CI behaves differently from a laptop."""
-    from kyroneval import config
+    from voiceval import config
     f = tmp_path / ".env"
     f.write_text("GROQ_API_KEY=from_file\n")
     monkeypatch.setattr(config, "SEARCH", [f])
@@ -263,9 +263,9 @@ def test_real_env_var_beats_dotenv(monkeypatch, tmp_path):
 
 
 def test_dotenv_populates_when_env_is_unset(monkeypatch, tmp_path):
-    from kyroneval import config
+    from voiceval import config
     f = tmp_path / ".env"
-    f.write_text("# comment\nGROQ_API_KEY=\"from_file\"\nKYRONEVAL_JUDGE=1\n")
+    f.write_text("# comment\nGROQ_API_KEY=\"from_file\"\nVOICEVAL_JUDGE=1\n")
     monkeypatch.setattr(config, "SEARCH", [f])
     monkeypatch.setattr(config, "_loaded", False)
     monkeypatch.delenv("GROQ_API_KEY", raising=False)
@@ -297,7 +297,7 @@ def test_agreement_is_never_reported_without_its_denominator():
     comparison with excluded rows must be marked NOT REPORTABLE and must carry
     its coverage.
     """
-    from kyroneval import calibrate
+    from voiceval import calibrate
     import inspect
     src = inspect.getsource(calibrate)
     for field in ("n_scored", "n_total", "n_excluded_no_verdict", "coverage",

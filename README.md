@@ -1,6 +1,6 @@
-# Kyron Eval — an evaluation platform for a healthcare voice agent
+# Voice Agent Eval — an evaluation platform for a healthcare voice agent
 
-**Sylesh Kona** · 8-hour take-home · all data synthetic · no API keys required to run anything here.
+**Sylesh Kona** · built under a strict 8-hour timebox · all data synthetic · no API keys required to run anything here.
 
 ---
 
@@ -23,7 +23,7 @@ Three consequences run through the whole submission:
 
 ---
 
-## Short summary (the four things the brief asks for)
+## Short summary
 
 **Where the time went.** ~15 min scoping and assumptions before any code; ~45 min on the
 world model, fault-injecting tool layer and scenario dataset; ~30 min on the harness and
@@ -62,12 +62,12 @@ No Docker, no Postgres, no keys. Two terminals.
 cd backend
 uv venv --python 3.10 .venv && uv pip install --python .venv/bin/python \
     fastapi "uvicorn[standard]" pydantic pytest httpx
-.venv/bin/python -m pytest tests -q                    # 20 tests
-.venv/bin/python -m kyroneval.cli run --agent v1_conservative     --out ../artifacts/runs --run-id v1_conservative
-.venv/bin/python -m kyroneval.cli run --agent v2_automation_push  --out ../artifacts/runs --run-id v2_automation_push
-.venv/bin/python -m kyroneval.cli run --agent v3_verified         --out ../artifacts/runs --run-id v3_verified
-.venv/bin/python -m kyroneval.calibrate       # evaluator-vs-human comparison
-.venv/bin/python -m kyroneval.reweight        # mix-sensitivity exhibit
+.venv/bin/python -m pytest tests -q                    # 45 tests
+.venv/bin/python -m voiceval.cli run --agent v1_conservative     --out ../artifacts/runs --run-id v1_conservative
+.venv/bin/python -m voiceval.cli run --agent v2_automation_push  --out ../artifacts/runs --run-id v2_automation_push
+.venv/bin/python -m voiceval.cli run --agent v3_verified         --out ../artifacts/runs --run-id v3_verified
+.venv/bin/python -m voiceval.calibrate       # evaluator-vs-human comparison
+.venv/bin/python -m voiceval.reweight        # mix-sensitivity exhibit
 .venv/bin/uvicorn app.main:app --port 8000
 
 # 2. UI
@@ -80,16 +80,16 @@ re-record against a live model:
 
 ```bash
 export GROQ_API_KEY=...             # or ANTHROPIC_API_KEY / OPENAI_API_KEY, auto-detected
-export KYRONEVAL_JUDGE=1            # explicit opt-in, so the test suite never spends money
+export VOICEVAL_JUDGE=1            # explicit opt-in, so the test suite never spends money
 
 # confirm the key and model before spending anything
-.venv/bin/python -m kyroneval.evaluators.judge --list-models
-.venv/bin/python -m kyroneval.evaluators.judge --smoke
+.venv/bin/python -m voiceval.evaluators.judge --list-models
+.venv/bin/python -m voiceval.evaluators.judge --smoke
 
 for a in v1_conservative v2_automation_push v3_verified; do
-  .venv/bin/python -m kyroneval.cli run --agent $a --out ../artifacts/runs --run-id $a
+  .venv/bin/python -m voiceval.cli run --agent $a --out ../artifacts/runs --run-id $a
 done
-.venv/bin/python -m kyroneval.calibrate
+.venv/bin/python -m voiceval.calibrate
 ```
 
 Three providers are supported (`JUDGE_PROVIDER` pins one, `JUDGE_MODEL` overrides the
@@ -110,7 +110,7 @@ what the code now produces — I did not want a README quoting numbers the code 
 **Where to look first:** `/compare` with `v1_conservative → v2_automation_push`, then
 `/calibration`.
 
-**Reproducibility, verified:** cloned fresh and re-ran the whole pipeline — 20 tests pass
+**Reproducibility, verified:** cloned fresh and re-ran the whole pipeline — 45 tests pass
 and every committed run artifact comes back byte-identical apart from its `created_at`
 timestamp. There is no seeded randomness anywhere; the agents and the caller are
 deterministic by design (see below).
@@ -187,7 +187,7 @@ differently.
 | Did the work happen? | Final simulated world state | `world.World` after the run |
 | Were critical entities right? | Tool-call arguments vs the caller's declared true intent | trace + scenario |
 | Should this have escalated? | Scenario policy field | customer policy, modelled as data |
-| Did the caller leave correctly informed? | **Human label** — twice, once transcript-only and once with state | `kyroneval/labels/` |
+| Did the caller leave correctly informed? | **Human label** — twice, once transcript-only and once with state | `voiceval/labels/` |
 
 **Cannot be established from a transcript alone:** whether a write landed; whether the
 pharmacy the agent *sent to* is the one the caller *meant*; whether a duplicate was
@@ -335,7 +335,7 @@ the caller's intent, which is what `critical_entity_accuracy` covers — and doe
 I would rather have two metrics each answering one question cleanly than one metric with a
 blind spot I have to remember.
 
-Artifacts: `artifacts/calibration/closure_calibration.json`, `backend/kyroneval/labels/`.
+Artifacts: `artifacts/calibration/closure_calibration.json`, `backend/voiceval/labels/`.
 
 ### v4 — putting an LLM judge where it actually belongs
 
@@ -520,8 +520,8 @@ worth an exhibit of its own.
 
 ### The aggregate reports the sample, not the system
 
-`kyroneval/reweight.py` rescores the *same runs* under a production-shaped tier mix
-(illustrative weights — I have no production data and am not claiming these are Kyron's):
+`voiceval/reweight.py` rescores the *same runs* under a production-shaped tier mix
+(illustrative weights — I have no production data and am not claiming these are those of any real deployment):
 
 | Metric | v1 | v2 | Δ |
 |---|---|---|---|
@@ -712,7 +712,7 @@ prompt.
 
 ## How I used AI
 
-I used Claude heavily and I would work the same way at Kyron. Roughly: it wrote most of the
+I used Claude heavily and I would work the same way on a production team. Roughly: it wrote most of the
 mechanical code — dataclasses, the React components, the CSS, table rendering, argument
 parsing — from specifications I gave it, and I directed the design, the scenarios, the
 metric definitions, and every interpretation of a result.

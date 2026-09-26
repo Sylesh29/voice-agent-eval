@@ -2,7 +2,7 @@ import "./globals.css";
 import Nav from "./nav";
 
 export const metadata = {
-  title: "Kyron Eval",
+  title: "Voice Agent Eval",
   description: "Evaluation platform for a healthcare voice agent",
 };
 
