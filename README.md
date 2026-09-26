@@ -23,6 +23,21 @@ Three consequences run through the whole submission:
 
 ---
 
+## What it looks like
+
+![Compare runs: metric deltas by slice](docs/screenshots/compare.png)
+
+*`/compare`, v1 to v2. The aggregate falls a little; escalation recall on the
+must-escalate slice falls 50 points. Regressions are listed before averages by design.*
+
+![Evaluator calibration](docs/screenshots/calibration.png)
+
+*`/calibration`. The regex evaluator agrees with the transcript-only human 91% of the
+time at Cohen's kappa of -0.05, which is chance. Four revisions, each forced by an
+investigated disagreement, and a deterministic audit of the judge's own citations.*
+
+---
+
 ## Short summary
 
 **Where the time went.** ~15 min scoping and assumptions before any code; ~45 min on the
