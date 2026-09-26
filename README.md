@@ -256,7 +256,7 @@ numbers do not transfer to ASR-driven failure modes.
 
 ### How I would validate each metric
 
-Part 3 asks how I would validate each metric, and it is the question I found hardest —
+How I would validate each metric is the question I found hardest —
 every one of these is only as good as an input I chose. Listed as concrete procedures, not
 intentions.
 
@@ -469,7 +469,7 @@ argument: clarity has no ground truth, and the regex's failure tail is unbounded
 
 ---
 
-## Part 5 — The experiment
+## Part 4 — The experiment
 
 ### What I tested and why
 
@@ -572,7 +572,7 @@ the denominators visible in the UI for that reason.
 
 ---
 
-## Part 6 — What I would put in front of the product team
+## Part 5 — What I would put in front of the product team
 
 **Three findings, ranked by what I would fix first.**
 
@@ -654,7 +654,7 @@ first thing I would build.
 
 ---
 
-## Part 7 — Production design
+## Part 6 — Production design
 
 Concrete priorities, not an architecture diagram.
 
@@ -678,7 +678,7 @@ everything on a must-escalate policy path, and a small uniform sample as a contr
 review set does not become self-confirming. Human labels are the scarcest input and should
 be spent where evaluators are least certain.
 
-**Regression gates.** Sliced, not aggregate — that is the argument of Part 5. Must-escalate
+**Regression gates.** Sliced, not aggregate — that is the argument of Part 4. Must-escalate
 recall and false completion on the tool-fault slice block a release on any drop. Aggregate
 task success is a dashboard number, not a gate.
 
