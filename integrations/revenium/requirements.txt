@@ -1,0 +1,2 @@
+revenium-python-sdk[anthropic,openai]>=0.10.1
+python-dotenv
