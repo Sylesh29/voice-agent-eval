@@ -62,3 +62,29 @@ A full run with `gpt-4o-mini` and `gpt-4o` is 102 judge calls at roughly 700 inp
 ## Why `--runaway`
 
 The original judge once lost 37 of 51 calls to rate limiting during a recording run. A retry loop without a cap is exactly how an eval job quietly multiplies its own cost. The flag replays that failure on purpose, against one customer, so a Revenium spike or budget alert has something real to catch.
+
+## Hard stop (Oct 23 2026)
+
+Rule in Revenium Guardrails: Total Cost, grouped by organization, $0.12 daily, Enforce a hard stop on, shadow mode off. SDK side, in `.env`:
+
+```
+REVENIUM_CIRCUIT_BREAKER_ENABLED=true
+REVENIUM_TEAM_ID=<team id>
+REVENIUM_ENFORCEMENT_BASE_URL=https://api.revenium.ai/profitstream
+REVENIUM_CB_POLL_INTERVAL_SECONDS=10
+REVENIUM_CACHE_DIR=integrations/revenium/.cache
+```
+
+`python integrations/revenium/check_rules.py` prints what the SDK can see; `watch_rule.py` polls until a rule trips.
+
+What happened:
+
+1. A 40 call storm on Harbor Pediatrics ($0.104) went through. The rule only counts spend from its own creation, so Harbor was still under the limit.
+2. A second wave, one call at a time, was blocked on call 26: `Request blocked by Revenium enforcement rule: Judge hard stop per customer`. The provider was never called.
+3. Without `REVENIUM_CACHE_DIR`, a fresh process lets its first call through before the first rule poll (fail open by design). With the cache, the first call is blocked too.
+
+Things I'd raise with the Revenium team:
+
+- The enforcement endpoint needs the `/profitstream` base path; the default derived from `REVENIUM_METERING_BASE_URL` returns 404.
+- The rule is grouped by organization, but the enforcement payload returns `groupBreakdown: null`, so SDK 0.10.1 falls back to the rule level `breached` flag. Once Harbor tripped it, Maple Family Practice, still under its own limit, was blocked as well. Per customer blocking did not work in this run.
+- Email is not available as a channel on enforcing rules, so alerting by email needs a second, notify only rule.
