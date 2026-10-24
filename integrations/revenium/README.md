@@ -1,6 +1,8 @@
 # Revenium metering for the closure judge
 
-The closure judge is the only part of this platform that spends money on an LLM. This folder meters it through [Revenium](https://www.revenium.ai) so every judge call carries its cost, its customer, its trace, and its grounding check.
+The customer is an AI evaluation team, and the platform is my own voice agent evaluator. Its one paid component is an LLM judge that grades whether the agent's closing line was clear to a patient.
+
+This folder meters it through [Revenium](https://www.revenium.ai) so every judge call carries its cost, its customer, its trace, and its grounding check.
 
 ## What changed
 
